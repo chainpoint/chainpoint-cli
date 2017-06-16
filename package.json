@@ -1,0 +1,29 @@
+{
+  "name": "chainpoint-cli",
+  "version": "0.1.0",
+  "description": "Chainpoint CLI",
+  "main": "chainpoint.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chainpoint/chainpoint-cli.git"
+  },
+  "keywords": [
+    "chainpoint"
+  ],
+  "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chainpoint/chainpoint-cli/issues"
+  },
+  "homepage": "https://github.com/chainpoint/chainpoint-cli#readme",
+  "dependencies": {
+    "envalid": "^3.0.0",
+    "lodash": "^4.17.4",
+    "uuid-time": "^1.0.0",
+    "uuid-validate": "^0.0.2",
+    "yargs": "^8.0.2"
+  }
+}
