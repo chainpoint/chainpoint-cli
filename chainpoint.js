@@ -6,19 +6,19 @@ const verify = require('./lib/verify.js')
 
 let argv = yargs
   .usage('usage: $0 <command> <argument>')
-  .command('submit', 'submit a hash to be anchored', function (yargs) {
+  .command('submit', 'submit a hash to be anchored', (yargs) => {
     let argv = yargs
       .usage('usage: submit <hash> ')
       .argv
     submit.execute(yargs, argv)
   })
-  .command('update', 'retrieve an updated proof for your hash(es), if available', function (yargs) {
+  .command('update', 'retrieve an updated proof for your hash(es), if available', (yargs) => {
     let argv = yargs
       .usage('usage: update <hash_id>')
       .argv
     update.execute(yargs, argv)
   })
-  .command('verify', 'verify a proof\'s anchor claims', function (yargs) {
+  .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
     let argv = yargs
       .usage('usage: verify <hash>')
       .argv
