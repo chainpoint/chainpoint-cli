@@ -1,69 +1,98 @@
 const _ = require('lodash')
 const uuidValidate = require('uuid-validate')
 const uuidTime = require('uuid-time')
-const crypto = require('crypto')
 const yargs = require('yargs')
+const request = require('request')
+const async = require('async')
+const cpb = require('chainpoint-binary')
 
 // load all environment variables into env object
 const env = require('./lib/parse-env.js')
+const HashItem = require('./lib/models/HashItem.js').HashItem
 
 let argv = yargs
-  .usage('usage: $0 <command> [options] <arguments>')
+  .usage('usage: $0 <command> <argument>')
   .command('submit', 'submit a hash to be anchored', function (yargs) {
     let argv = yargs
-      .usage('usage: $0 ( [options] <hash> | [options] --file <file> )')
-      .option('f', {
-        alias: 'file',
-        describe: 'hash a local file',
-        type: 'string',
-        requiresArg: true
-      })
-      .option('r', {
-        alias: 'receive',
-        count: true,
-        describe: 'receive the calendar proof before returning',
-        type: 'string'
-      })
+      .usage('usage: submit <hash> ')
       .argv
     runSubmitCommand(yargs, argv)
   })
   .command('update', 'retrieve an updated proof for your hash(es), if available', function (yargs) {
     let argv = yargs
-      .usage('usage: $0 update [hash_id]')
+      .usage('usage: update <hash_id>')
       .argv
     runUpdateCommand(yargs, argv)
   })
   .command('verify', 'verify a proof\'s anchor claims', function (yargs) {
     let argv = yargs
-      .usage('usage: $0 verify <hash>')
+      .usage('usage: verify <hash>')
       .argv
     runVerifyCommand(yargs, argv)
   })
-  .demandCommand(1, 'You must provide a command to execute')
+  .demandCommand(1, 'You must specify a command to execute')
   .help('help')
   .argv
 
 function runSubmitCommand (yargs, argv) {
-  let hash = null
-  // check for receive argument
-  let receive = argv.receive
-  // check for file argument
-  let filePath = argv.file
-  if (filePath) {
-    hash = crypto.createHash('sha256').update(Date.now().toString()).digest('hex')
-  } else {
-    // check for hash argument
-    let hash = argv._[1]
-    if (!hashIsValid(hash)) {
-      yargs.showHelp()
-      console.log('Missing or invalid hash \n')
-      return
-    }
+  // check for hash argument
+  let hash = argv._[1]
+  if (!hashIsValid(hash)) {
+    yargs.showHelp()
+    console.log('Missing or invalid hash \n')
+    return
   }
 
-  // parameters are valid, process submit command
-  console.log(`${hash} submitted`)
-  if (receive) console.log('proof received')
+  HashItem.sequelize.sync().then(() => {
+    submitHashes([hash])
+  }).catch((err) => {
+    console.error(`HashItem submit error: ${err.message} : ${err.stack}`)
+  })
+}
+
+function submitHashes (hashArray) {
+  let options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    uri: env.CHAINPOINT_API_BASE_URI + '/hashes',
+    body: { hashes: hashArray },
+    json: true,
+    gzip: true
+  }
+  request(options, function (err, response, body) {
+    if (err) {
+      console.error(err)
+      return
+    }
+    if (response.statusCode !== 200) {
+      console.error(response.body.message)
+      return
+    }
+
+    async.each(body.hashes, function (hashItem, eachCallback) {
+      let now = Date.now()
+      let row = {}
+      row.hashId = hashItem.hash_id
+      row.hash = hashItem.hash
+      row.createdAt = now
+      row.updatedAt = now
+
+      HashItem.create(row)
+        .then((newRow) => {
+          let hashItem = newRow.get({ plain: true })
+          console.log(`${hashItem.hash} submitted and assigned a hash_id of ${hashItem.hashId}`)
+          return eachCallback(null)
+        }).catch(err => {
+          return eachCallback(`HashItem submit error: ${err.message} : ${err.stack}`)
+        })
+    }, function (err) {
+      if (err) {
+        console.error(err)
+      }
+    })
+  })
 }
 
 function runUpdateCommand (yargs, argv) {
@@ -84,34 +113,150 @@ function runUpdateCommand (yargs, argv) {
       return
     }
     // parameters are valid, process update command
-    console.log(`${hashId} updated`)
+    HashItem.sequelize.sync().then(() => {
+      updateHashesByHashId([hashId])
+    }).catch((err) => {
+      console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+    })
   } else {
     // process hashes from local storage
-    console.log('hash database updated')
+    HashItem.sequelize.sync().then(() => {
+      // retrieve hash_ids
+      HashItem.findAll({ attributes: ['hashId'] })
+        .then((hashItems) => {
+          // get hashId array
+          let hashIds = hashItems.map((hashItem) => {
+            return hashItem.hashId
+          })
+          // filter out those older than PROOF_EXPIRE_MINUTES
+          hashIds = hashIds.filter((hashId) => {
+            return !hashIdExpired(hashId)
+          })
+          // TODO: Account for max proofs per request to API
+          // retrieve latest proofs
+          updateHashesByHashId(hashIds)
+        })
+    }).catch((err) => {
+      console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+    })
   }
 }
 
-function runVerifyCommand (yargs, argv) {
-  // check for valid argument count
-  if (argv._.length < 2) {
-    yargs.showHelp()
-    return
+function updateHashesByHashId (hashIdArray) {
+  let hashIdCSV = hashIdArray.join(',')
+  let options = {
+    headers: {
+      'Content-Type': 'application/json',
+      hashids: hashIdCSV
+    },
+    method: 'GET',
+    uri: env.CHAINPOINT_API_BASE_URI + '/proofs',
+    json: true,
+    gzip: true
   }
+  request(options, function (err, response, body) {
+    if (err) {
+      console.error(err)
+      return
+    }
+    if (response.statusCode !== 200) {
+      console.error(response.body.message)
+      return
+    }
+
+    async.each(body, function (hashItem, eachCallback) {
+      if (hashItem.proof === null) {
+        console.log(`${hashItem.hash_id} has no proof data`)
+        return eachCallback(null)
+      } else {
+        cpb.binaryToObject(hashItem.proof, function (err, proofObject) {
+          if (err) {
+            console.log(`Could not parse proof for hash_id ${hashItem.hash_id}`)
+            return eachCallback(null)
+          } else {
+            let updateData = {}
+            updateData.cal = true // if we've gotten this far, the cal branch must  at least exist
+            let afterCalBranches = proofObject.branches[0].branches
+            _.each(afterCalBranches, (branch) => {
+              let anchorType = branch.ops[branch.ops.length - 1].anchors[0].type
+              switch (anchorType) {
+                case 'eth':
+                  updateData.eth = true
+                  break
+                case 'btc':
+                  updateData.btc = true
+                  break
+              }
+            })
+            updateData.proof = hashItem.proof
+
+            HashItem.update(updateData, { where: { hashId: hashItem.hash_id } })
+              .then((result) => {
+                console.log(`${hashItem.hash_id} updated with latest proof data`)
+                return eachCallback(null)
+              }).catch(err => {
+                return eachCallback(`HashItem update error: ${err.message} : ${err.stack}`)
+              })
+          }
+        })
+      }
+    }, function (err) {
+      if (err) {
+        console.error(err)
+      }
+    })
+  })
+}
+
+function runVerifyCommand (yargs, argv) {
   // check for valid argument value
   let hashId = argv._[1]
   let isValidHashId = uuidValidate(hashId, 1)
   if (!isValidHashId) {
     yargs.showHelp()
-    console.log(`Invalid hash_id - ${hashId}\n`)
-    return
-  }
-  // check hash_id age for expiration
-  if (hashIdExpired(hashId)) { // this hash has expired
-    console.log(`Expired hash_id - ${hashId}\n`)
+    console.log(`Missing or invalid hash_id \n`)
     return
   }
   // parameters are valid, process update command
-  console.log(`${hashId} verified`)
+  HashItem.sequelize.sync().then(() => {
+    // retrieve the proof by hash_id
+    HashItem.find({ where: { hashId: hashId } }).then((hashItem) => {
+      if (!hashItem) {
+        console.log(`Cannot find proof for hash hash_id \n`)
+        return
+      }
+      // run verification on proof
+      verifyProofs([hashItem.proof])
+    })
+  }).catch((err) => {
+    console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+  })
+}
+
+function verifyProofs (proofArray) {
+  let options = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    uri: env.CHAINPOINT_API_BASE_URI + '/verify',
+    body: { proofs: proofArray },
+    json: true,
+    gzip: true
+  }
+  request(options, function (err, response, body) {
+    if (err) {
+      console.error(err)
+      return
+    }
+    if (response.statusCode !== 200) {
+      console.error(response.body.message)
+      return
+    }
+    _.each(body, (proof) => {
+      console.log(`Proof for hash_id ${proof.hash_id || '(not found)'} is ${proof.status} `)
+    })
+  })
 }
 
 function hashIsValid (hash) {

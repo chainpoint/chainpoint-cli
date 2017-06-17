@@ -23,8 +23,14 @@
   },
   "homepage": "https://github.com/chainpoint/chainpoint-cli#readme",
   "dependencies": {
+    "async": "^2.4.1",
+    "chainpoint-binary": "^3.1.1",
     "envalid": "^3.0.0",
     "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "sequelize": "^4.1.0",
+    "sqlite3": "^3.1.8",
+    "untildify": "^3.0.2",
     "uuid-time": "^1.0.0",
     "uuid-validate": "^0.0.2",
     "yargs": "^8.0.2"
