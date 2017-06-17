@@ -222,7 +222,7 @@ function runVerifyCommand (yargs, argv) {
     // retrieve the proof by hash_id
     HashItem.find({ where: { hashId: hashId } }).then((hashItem) => {
       if (!hashItem) {
-        console.log(`Cannot find proof for hash hash_id \n`)
+        console.log(`Cannot find proof for hash ${hashId} \n`)
         return
       }
       // run verification on proof
