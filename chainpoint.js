@@ -42,11 +42,13 @@ function runSubmitCommand (yargs, argv) {
     console.log('Missing or invalid hash \n')
     return
   }
-
-  HashItem.sequelize.sync().then(() => {
-    submitHashes([hash])
-  }).catch((err) => {
-    console.error(`HashItem submit error: ${err.message} : ${err.stack}`)
+  // parameters are valid, open storage and process submit
+  openStorageConnection((err) => {
+    if (err) {
+      console.error(`HashItem submit error: ${err.message} : ${err.stack}`)
+    } else {
+      submitHashes([hash])
+    }
   })
 }
 
@@ -112,32 +114,36 @@ function runUpdateCommand (yargs, argv) {
       console.log(`Expired hash_id - ${hashId}\n`)
       return
     }
-    // parameters are valid, process update command
-    HashItem.sequelize.sync().then(() => {
-      updateHashesByHashId([hashId])
-    }).catch((err) => {
-      console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+    // parameters are valid, open storage and process update
+    openStorageConnection((err) => {
+      if (err) {
+        console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+      } else {
+        updateHashesByHashId([hashId])
+      }
     })
   } else {
-    // process hashes from local storage
-    HashItem.sequelize.sync().then(() => {
-      // retrieve hash_ids
-      HashItem.findAll({ attributes: ['hashId'] })
-        .then((hashItems) => {
-          // get hashId array
-          let hashIds = hashItems.map((hashItem) => {
-            return hashItem.hashId
+    // open storage and process update using hashes from local storage
+    openStorageConnection((err) => {
+      if (err) {
+        console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+      } else {
+        // retrieve hash_ids
+        HashItem.findAll({ attributes: ['hashId'] })
+          .then((hashItems) => {
+            // get hashId array
+            let hashIds = hashItems.map((hashItem) => {
+              return hashItem.hashId
+            })
+            // filter out those older than PROOF_EXPIRE_MINUTES
+            hashIds = hashIds.filter((hashId) => {
+              return !hashIdExpired(hashId)
+            })
+            // TODO: Account for max proofs per request to API
+            // retrieve latest proofs
+            updateHashesByHashId(hashIds)
           })
-          // filter out those older than PROOF_EXPIRE_MINUTES
-          hashIds = hashIds.filter((hashId) => {
-            return !hashIdExpired(hashId)
-          })
-          // TODO: Account for max proofs per request to API
-          // retrieve latest proofs
-          updateHashesByHashId(hashIds)
-        })
-    }).catch((err) => {
-      console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+      }
     })
   }
 }
@@ -217,19 +223,21 @@ function runVerifyCommand (yargs, argv) {
     console.log(`Missing or invalid hash_id \n`)
     return
   }
-  // parameters are valid, process update command
-  HashItem.sequelize.sync().then(() => {
-    // retrieve the proof by hash_id
-    HashItem.find({ where: { hashId: hashId } }).then((hashItem) => {
-      if (!hashItem) {
-        console.log(`Cannot find proof for hash ${hashId} \n`)
-        return
-      }
-      // run verification on proof
-      verifyProofs([hashItem.proof])
-    })
-  }).catch((err) => {
-    console.error(`HashItem update error: ${err.message} : ${err.stack}`)
+  // parameters are valid, open storage and process verify
+  openStorageConnection((err) => {
+    if (err) {
+      console.error(`HashItem verify error: ${err.message} : ${err.stack}`)
+    } else {
+      // retrieve the proof by hash_id
+      HashItem.find({ where: { hashId: hashId } }).then((hashItem) => {
+        if (!hashItem) {
+          console.log(`Cannot find proof for hash ${hashId} \n`)
+          return
+        }
+        // run verification on proof
+        verifyProofs([hashItem.proof])
+      })
+    }
   })
 }
 
@@ -269,6 +277,16 @@ function hashIdExpired (hashId) {
   let uuidDiff = nowEpoch - uuidEpoch
   let maxDiff = env.PROOF_EXPIRE_MINUTES * 60 * 1000
   return (uuidDiff > maxDiff)
+}
+
+function openStorageConnection (callback) {
+  HashItem.sequelize.sync().then(() => {
+    // all assertions made successfully, return success
+    return callback(null)
+  }).catch((err) => {
+    // an error has occurred with a table assertion, return error
+    return callback(err)
+  })
 }
 
 function parseCommand (yargs, argv) {
