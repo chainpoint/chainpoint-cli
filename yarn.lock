@@ -144,9 +144,9 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-chainpoint-binary@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-3.1.1.tgz#419f3b51987cf464701edba73866ccd44d2842c8"
+chainpoint-binary@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-3.2.0.tgz#f47292ed5b9556b926eabd22333ece3890fdeb1a"
   dependencies:
     chainpoint-proof-json-schema "^0.0.2"
     msgpack-lite "^0.1.26"
