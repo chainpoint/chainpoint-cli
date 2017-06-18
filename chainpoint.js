@@ -1,28 +1,41 @@
 const _ = require('lodash')
 const yargs = require('yargs')
-const submit = require('./lib/submit.js')
-const update = require('./lib/update.js')
-const verify = require('./lib/verify.js')
+const submitCmd = require('./lib/submit.js')
+const updateCmd = require('./lib/update.js')
+const verifyCmd = require('./lib/verify.js')
+const importCmd = require('./lib/import.js')
 
 let argv = yargs
-  .usage('usage: $0 <command> <argument>')
+  .usage('usage: $0 <command> [options] <argument>')
   .command('submit', 'submit a hash to be anchored', (yargs) => {
     let argv = yargs
       .usage('usage: submit <hash> ')
       .argv
-    submit.execute(yargs, argv)
+    submitCmd.execute(yargs, argv)
   })
   .command('update', 'retrieve an updated proof for your hash(es), if available', (yargs) => {
     let argv = yargs
       .usage('usage: update <hash_id>')
       .argv
-    update.execute(yargs, argv)
+    updateCmd.execute(yargs, argv)
   })
   .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
     let argv = yargs
       .usage('usage: verify <hash>')
       .argv
-    verify.execute(yargs, argv)
+    verifyCmd.execute(yargs, argv)
+  })
+  .command('import', 'import a proof into the client db', (yargs) => {
+    let argv = yargs
+      .usage('usage: import --proof <file>')
+      .option('p', {
+        alias: 'proof',
+        demandOption: true,
+        requiresArg: true,
+        type: 'string'
+      })
+      .argv
+    importCmd.execute(yargs, argv)
   })
   .demandCommand(1, 'You must specify a command to execute')
   .help('help')
@@ -34,7 +47,7 @@ function parseCommand (yargs, argv) {
   } else {
     // check for unknown command
     let command = _.lowerCase(argv._[0])
-    if (_.indexOf(['submit', 'update', 'verify'], command) < 0) {
+    if (_.indexOf(['submit', 'update', 'verify', 'import'], command) < 0) {
       console.log(`Unknown command - ${command}\n`)
       yargs.showHelp()
     }
