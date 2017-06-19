@@ -32,7 +32,7 @@ let argv = yargs
   })
   .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
     let argv = yargs
-      .usage('usage: verify <hash>')
+      .usage('usage: verify <hash_id>')
       .argv
     verifyCmd.execute(yargs, argv)
   })
