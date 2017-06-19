@@ -4,6 +4,7 @@ const submitCmd = require('./lib/submit.js')
 const updateCmd = require('./lib/update.js')
 const verifyCmd = require('./lib/verify.js')
 const importCmd = require('./lib/import.js')
+const exportCmd = require('./lib/export.js')
 
 let argv = yargs
   .usage('usage: $0 <command> [options] <argument>')
@@ -37,6 +38,16 @@ let argv = yargs
       .argv
     importCmd.execute(yargs, argv)
   })
+  .command('export', 'export a proof into the current directory', (yargs) => {
+    let argv = yargs
+      .usage('usage: export [options] <hash_id>')
+      .option('b', {
+        alias: 'binary',
+        boolean: true
+      })
+      .argv
+    exportCmd.execute(yargs, argv)
+  })
   .demandCommand(1, 'You must specify a command to execute')
   .help('help')
   .argv
@@ -47,7 +58,7 @@ function parseCommand (yargs, argv) {
   } else {
     // check for unknown command
     let command = _.lowerCase(argv._[0])
-    if (_.indexOf(['submit', 'update', 'verify', 'import'], command) < 0) {
+    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export'], command) < 0) {
       console.log(`Unknown command - ${command}\n`)
       yargs.showHelp()
     }

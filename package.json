@@ -25,6 +25,7 @@
   "dependencies": {
     "async": "^2.4.1",
     "chainpoint-binary": "^3.2.0",
+    "chainpoint-proof-json-schema": "^0.0.2",
     "envalid": "^3.0.0",
     "lodash": "^4.17.4",
     "request": "^2.81.0",
