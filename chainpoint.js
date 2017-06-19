@@ -1,3 +1,6 @@
+// load environment variables
+const env = require('./lib/parse-env.js')
+
 const _ = require('lodash')
 const yargs = require('yargs')
 const submitCmd = require('./lib/submit.js')
@@ -8,9 +11,16 @@ const exportCmd = require('./lib/export.js')
 
 let argv = yargs
   .usage('usage: $0 <command> [options] <argument>')
+  .option('s', {
+    alias: 'server',
+    requiresArg: true,
+    default: env.CHAINPOINT_API_BASE_URI,
+    type: 'string'
+  })
   .command('submit', 'submit a hash to be anchored', (yargs) => {
     let argv = yargs
-      .usage('usage: submit <hash> ')
+      .usage('usage: submit [options] <hash> ')
+
       .argv
     submitCmd.execute(yargs, argv)
   })
@@ -43,7 +53,9 @@ let argv = yargs
       .usage('usage: export [options] <hash_id>')
       .option('b', {
         alias: 'binary',
-        boolean: true
+        demandOption: false,
+        requiresArg: false,
+        type: 'boolean'
       })
       .argv
     exportCmd.execute(yargs, argv)
