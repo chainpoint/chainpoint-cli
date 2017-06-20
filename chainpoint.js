@@ -10,7 +10,7 @@ const importCmd = require('./lib/import.js')
 const exportCmd = require('./lib/export.js')
 
 let argv = yargs
-  .usage('usage: $0 <command> [options] <argument>')
+  .usage('usage: ' + require.main.filename.split('/').pop().slice(0, -3) + ' <command> [options] <argument>')
   .option('s', {
     alias: 'server',
     requiresArg: true,
