@@ -71,8 +71,8 @@ function parseCommand (yargs, argv) {
     // check for unknown command
     let command = _.lowerCase(argv._[0])
     if (_.indexOf(['submit', 'update', 'verify', 'import', 'export'], command) < 0) {
-      console.log(`Unknown command - ${command}\n`)
       yargs.showHelp()
+      console.log(`Unknown command: ${command}`)
     }
   }
 }
