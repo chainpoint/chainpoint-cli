@@ -6,8 +6,8 @@
   "bin": "chainpoint.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/pkg . --out-path ./dist/",
-    "build-debug": "./node_modules/.bin/pkg --debug . --out-path ./dist/"
+    "build": "./node_modules/.bin/pkg . --out-path ./build/",
+    "build-debug": "./node_modules/.bin/pkg --debug . --out-path ./build/"
   },
   "repository": {
     "type": "git",
