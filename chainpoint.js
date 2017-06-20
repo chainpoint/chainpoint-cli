@@ -10,7 +10,7 @@ const importCmd = require('./lib/import.js')
 const exportCmd = require('./lib/export.js')
 
 let argv = yargs
-  .usage('usage: ' + require.main.filename.split('/').pop().slice(0, -3) + ' <command> [options] <argument>')
+  .usage('Usage: ' + require.main.filename.split('/').pop().slice(0, -3) + ' <command> [options] <argument>')
   .option('s', {
     alias: 'server',
     requiresArg: true,
@@ -19,26 +19,26 @@ let argv = yargs
   })
   .command('submit', 'submit a hash to be anchored', (yargs) => {
     let argv = yargs
-      .usage('usage: submit [options] <hash> ')
+      .usage('Usage: submit [options] <hash> ')
 
       .argv
     submitCmd.execute(yargs, argv)
   })
   .command('update', 'retrieve an updated proof for your hash(es), if available', (yargs) => {
     let argv = yargs
-      .usage('usage: update <hash_id>')
+      .usage('Usage: update <hash_id>')
       .argv
     updateCmd.execute(yargs, argv)
   })
   .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
     let argv = yargs
-      .usage('usage: verify <hash_id>')
+      .usage('Usage: verify <hash_id>')
       .argv
     verifyCmd.execute(yargs, argv)
   })
-  .command('import', 'import a proof into the client db', (yargs) => {
+  .command('import', 'import a proof', (yargs) => {
     let argv = yargs
-      .usage('usage: import --proof <file>')
+      .usage('Usage: import --proof <file>')
       .option('p', {
         alias: 'proof',
         demandOption: true,
@@ -48,9 +48,9 @@ let argv = yargs
       .argv
     importCmd.execute(yargs, argv)
   })
-  .command('export', 'export a proof into the current directory', (yargs) => {
+  .command('export', 'export a proof', (yargs) => {
     let argv = yargs
-      .usage('usage: export [options] <hash_id>')
+      .usage('Usage: export [options] <hash_id>')
       .option('b', {
         alias: 'binary',
         demandOption: false,
@@ -60,7 +60,7 @@ let argv = yargs
       .argv
     exportCmd.execute(yargs, argv)
   })
-  .demandCommand(1, 'You must specify a command to execute')
+  .demandCommand(1, 'You must specify a command.')
   .help('help')
   .argv
 
