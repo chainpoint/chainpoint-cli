@@ -28,13 +28,25 @@ let argv = yargs
   })
   .command('update', 'retrieve an updated proof for your hash(es), if available', (yargs) => {
     let argv = yargs
-      .usage('Usage: update <hash_id>')
+      .usage('Usage: update [options] <hash_id>')
+      .option('a', {
+        alias: 'all',
+        demandOption: false,
+        requiresArg: false,
+        type: 'boolean'
+      })
       .argv
     updateCmd.execute(yargs, argv)
   })
   .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
     let argv = yargs
-      .usage('Usage: verify <hash_id>')
+      .usage('Usage: verify [options] <hash_id>')
+      .option('a', {
+        alias: 'all',
+        demandOption: false,
+        requiresArg: false,
+        type: 'boolean'
+      })
       .argv
     verifyCmd.execute(yargs, argv)
   })
