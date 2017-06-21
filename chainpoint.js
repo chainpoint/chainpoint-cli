@@ -60,6 +60,12 @@ let argv = yargs
         requiresArg: true,
         type: 'string'
       })
+      .option('f', {
+        alias: 'force',
+        demandOption: false,
+        requiresArg: false,
+        type: 'boolean'
+      })
       .argv
     importCmd.execute(yargs, argv)
   })
