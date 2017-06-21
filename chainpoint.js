@@ -110,4 +110,5 @@ function parseCommand (yargs, argv) {
   }
 }
 
+// parse cli command and execute
 parseCommand(yargs, argv)
