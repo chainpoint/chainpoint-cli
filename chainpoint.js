@@ -10,6 +10,7 @@ const importCmd = require('./lib/import.js')
 const exportCmd = require('./lib/export.js')
 const listCmd = require('./lib/list.js')
 const showCmd = require('./lib/show.js')
+const deleteCmd = require('./lib/delete.js')
 
 let argv = yargs
   .usage('Usage: ' + require.main.filename.split('/').pop().slice(0, -3) + ' <command> [options] <argument>')
@@ -86,6 +87,12 @@ let argv = yargs
       .argv
     showCmd.execute(yargs, argv)
   })
+  .command('delete', 'delete a hash from the local database', (yargs) => {
+    let argv = yargs
+      .usage('Usage: delete <hash_id>')
+      .argv
+    deleteCmd.execute(yargs, argv)
+  })
   .demandCommand(1, 'You must specify a command.')
   .help('help')
   .argv
@@ -96,7 +103,7 @@ function parseCommand (yargs, argv) {
   } else {
     // check for unknown command
     let command = _.lowerCase(argv._[0])
-    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show'], command) < 0) {
+    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete'], command) < 0) {
       yargs.showHelp()
       console.log(`Unknown command: ${command}`)
     }
