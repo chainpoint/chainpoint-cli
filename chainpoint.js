@@ -22,8 +22,7 @@ let argv = yargs
   })
   .command('submit', 'submit a hash to be anchored', (yargs) => {
     let argv = yargs
-      .usage('Usage: submit [options] <hash> ')
-
+      .usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )')
       .argv
     submitCmd.execute(yargs, argv)
   })
