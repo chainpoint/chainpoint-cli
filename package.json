@@ -27,7 +27,7 @@
     "async": "^2.4.1",
     "chainpoint-binary": "^3.2.0",
     "chainpoint-proof-json-schema": "^0.0.2",
-    "envalid": "^3.1.0",
+    "envalid": "^3.1.1",
     "lodash": "^4.17.4",
     "nedb": "^1.8.0",
     "request": "^2.81.0",
