@@ -8,6 +8,7 @@ const updateCmd = require('./lib/update.js')
 const verifyCmd = require('./lib/verify.js')
 const importCmd = require('./lib/import.js')
 const exportCmd = require('./lib/export.js')
+const listCmd = require('./lib/list.js')
 
 let argv = yargs
   .usage('Usage: ' + require.main.filename.split('/').pop().slice(0, -3) + ' <command> [options] <argument>')
@@ -60,6 +61,12 @@ let argv = yargs
       .argv
     exportCmd.execute(yargs, argv)
   })
+  .command('list', 'display the status of every hash in the local database', (yargs) => {
+    let argv = yargs
+      .usage('Usage: list')
+      .argv
+    listCmd.execute(yargs, argv)
+  })
   .demandCommand(1, 'You must specify a command.')
   .help('help')
   .argv
@@ -70,7 +77,7 @@ function parseCommand (yargs, argv) {
   } else {
     // check for unknown command
     let command = _.lowerCase(argv._[0])
-    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export'], command) < 0) {
+    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list'], command) < 0) {
       yargs.showHelp()
       console.log(`Unknown command: ${command}`)
     }
