@@ -86,7 +86,7 @@ let argv = yargs
       .argv
     listCmd.execute(yargs, argv)
   })
-  .command('show', 'show the proof for a hash', (yargs) => {
+  .command('show', 'show the proof for a hash_id', (yargs) => {
     let argv = yargs
       .usage('Usage: show <hash_id>')
       .argv
