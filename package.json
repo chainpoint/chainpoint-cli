@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Chainpoint CLI",
   "main": "chainpoint.js",
-  "bin": "chainpoint.js",
+  "bin": {
+    "chainpoint": "./chainpoint.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",

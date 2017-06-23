@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 // load environment variables
 const env = require('./lib/parse-env.js')
 
