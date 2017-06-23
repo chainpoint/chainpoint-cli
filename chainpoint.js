@@ -18,6 +18,7 @@ let argv = yargs
     alias: 'server',
     requiresArg: true,
     default: env.CHAINPOINT_API_BASE_URI,
+    description: 'specify server to use',
     type: 'string'
   })
   .command('submit', 'submit a hash to be anchored', (yargs) => {
@@ -33,6 +34,7 @@ let argv = yargs
         alias: 'all',
         demandOption: false,
         requiresArg: false,
+        description: 'process all items in local database',
         type: 'boolean'
       })
       .argv
@@ -45,6 +47,7 @@ let argv = yargs
         alias: 'all',
         demandOption: false,
         requiresArg: false,
+        description: 'process all items in local database',
         type: 'boolean'
       })
       .argv
@@ -57,12 +60,14 @@ let argv = yargs
         alias: 'proof',
         demandOption: true,
         requiresArg: true,
+        description: 'read from proof file',
         type: 'string'
       })
       .option('f', {
         alias: 'force',
         demandOption: false,
         requiresArg: false,
+        description: 'overwrite existing data',
         type: 'boolean'
       })
       .argv
@@ -75,6 +80,7 @@ let argv = yargs
         alias: 'binary',
         demandOption: false,
         requiresArg: false,
+        description: 'use binary format',
         type: 'boolean'
       })
       .argv
@@ -99,7 +105,7 @@ let argv = yargs
     deleteCmd.execute(yargs, argv)
   })
   .demandCommand(1, 'You must specify a command.')
-  .help('help')
+  .help('help', 'show help')
   .argv
 
 function parseCommand (yargs, argv) {
