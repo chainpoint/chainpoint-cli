@@ -58,6 +58,20 @@ You will need a recent version of Node.js and the [Yarn](https://yarnpkg.com/en/
 yarn
 ```
 
+### Run It Locally
+
+```
+./chainpoint.js
+```
+
+### Install it Locally
+
+Replace `PATH` with the full path to your clone of this repository.
+
+```
+yarn global add file:PATH/chainpoint-cli
+```
+
 ### Build Executables
 
 ```
