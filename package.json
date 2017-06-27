@@ -39,6 +39,6 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "pkg": "^4.1.0"
+    "pkg": "^4.1.1"
   }
 }
