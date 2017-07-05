@@ -124,5 +124,5 @@ function parseCommand (yargs, argv) {
   }
 }
 
-// parse cli command and execute
+// parse cli command and display error message on bad or missing command
 parseCommand(yargs, argv)
