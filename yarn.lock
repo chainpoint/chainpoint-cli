@@ -137,17 +137,17 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-chainpoint-binary@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-3.2.0.tgz#f47292ed5b9556b926eabd22333ece3890fdeb1a"
+chainpoint-binary@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-4.0.0.tgz#f5fa3b077df09417161692957c81501a5fbf8a79"
   dependencies:
-    chainpoint-proof-json-schema "^0.0.2"
+    chainpoint-proof-json-schema "^1.0.0"
     msgpack-lite "^0.1.26"
     pako "^1.0.5"
 
-chainpoint-proof-json-schema@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-0.0.2.tgz#ea59939a19d8f861f8fc8df8ba1f9928d6411df3"
+chainpoint-proof-json-schema@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-1.0.0.tgz#39795322e3619724766638fce6de8c8632f3d25a"
   dependencies:
     is-my-json-valid "^2.16.0"
 
