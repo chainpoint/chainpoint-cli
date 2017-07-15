@@ -33,12 +33,12 @@ Usage: chainpoint <command> [options] <argument>
 
 Commands:
   submit  submit a hash to be anchored
-  update  retrieve an updated proof for your hash(es), if available
+  update  retrieve an updated proof by hash_id_node, if available
   verify  verify a proof's anchor claims
   import  import a proof
   export  export a proof
   list    display the status of every hash in the local database
-  show    show the proof for a hash_id
+  show    show the proof for a hash with a given hash_id_node
   delete  delete a hash from the local database
 
 Options:

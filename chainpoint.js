@@ -19,7 +19,7 @@ let argv = yargs
   .option('s', {
     alias: 'server',
     requiresArg: true,
-    default: env.CHAINPOINT_API_BASE_URI,
+    default: env.CHAINPOINT_NODE_API_BASE_URI,
     description: 'specify server to use',
     type: 'string'
   })
@@ -32,7 +32,7 @@ let argv = yargs
   })
   .command('update', 'retrieve an updated proof for your hash(es), if available', (yargs) => {
     let argv = yargs
-      .usage('Usage: update [options] <hash_id>')
+      .usage('Usage: update [options] <hash_id_node>')
       .option('a', {
         alias: 'all',
         demandOption: false,
@@ -45,7 +45,7 @@ let argv = yargs
   })
   .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
     let argv = yargs
-      .usage('Usage: verify [options] <hash_id>')
+      .usage('Usage: verify [options] <hash_id_node>')
       .option('a', {
         alias: 'all',
         demandOption: false,
@@ -78,7 +78,7 @@ let argv = yargs
   })
   .command('export', 'export a proof', (yargs) => {
     let argv = yargs
-      .usage('Usage: export [options] <hash_id>')
+      .usage('Usage: export [options] <hash_id_node>')
       .option('b', {
         alias: 'binary',
         demandOption: false,
@@ -95,15 +95,15 @@ let argv = yargs
       .argv
     listCmd.execute(yargs, argv)
   })
-  .command('show', 'show the proof for a hash_id', (yargs) => {
+  .command('show', 'show the proof for a hash_id_node', (yargs) => {
     let argv = yargs
-      .usage('Usage: show <hash_id>')
+      .usage('Usage: show <hash_id_node>')
       .argv
     showCmd.execute(yargs, argv)
   })
   .command('delete', 'delete a hash from the local database', (yargs) => {
     let argv = yargs
-      .usage('Usage: delete <hash_id>')
+      .usage('Usage: delete <hash_id_node>')
       .argv
     deleteCmd.execute(yargs, argv)
   })

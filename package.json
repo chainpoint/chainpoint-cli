@@ -30,6 +30,7 @@
     "chainpoint-binary": "^4.0.0",
     "chainpoint-proof-json-schema": "^1.0.0",
     "envalid": "^3.1.1",
+    "jmespath": "^0.15.0",
     "lodash": "^4.17.4",
     "nedb": "^1.8.0",
     "request": "^2.81.0",
