@@ -7,10 +7,16 @@
     "chainpoint": "./chainpoint.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
-    "build-debug": "./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
-    "build-clean": "rm -f ./build/*"
+    "build": "yarn build-clean && ./node_modules/.bin/pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
+    "build-debug": "yarn build-clean && ./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
+    "build-clean": "rm -f ./build/*",
+    "install-global": "yarn global add file:$(pwd)",
+    "uninstall-global": "cd ~/.config/yarn/global && yarn global remove chainpoint-cli",
+    "install-bin-macos": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-macos-x64 /usr/local/bin/chainpoint",
+    "install-bin-linux-x64": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x64 /usr/local/bin/chainpoint",
+    "install-bin-linux-x86": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x86 /usr/local/bin/chainpoint",
+    "install-bin-alpine": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-alpine-x64 /usr/local/bin/chainpoint",
+    "uninstall-bin": "rm -f /usr/local/bin/chainpoint"
   },
   "repository": {
     "type": "git",
