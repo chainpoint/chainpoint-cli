@@ -23,6 +23,13 @@ let argv = yargs
     description: 'specify server to use',
     type: 'string'
   })
+  .option('q', {
+    alias: 'quiet',
+    demandOption: false,
+    requiresArg: false,
+    description: 'suppress all non-error output',
+    type: 'boolean'
+  })
   .command('submit', 'submit a hash to be anchored', (yargs) => {
     let argv = yargs
       .usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )')
@@ -119,7 +126,7 @@ function parseCommand (yargs, argv) {
     let command = _.lowerCase(argv._[0])
     if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete'], command) < 0) {
       yargs.showHelp()
-      console.log(`Unknown command: ${command}`)
+      console.error(`Unknown command: ${command}`)
     }
   }
 }
