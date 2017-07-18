@@ -13,6 +13,7 @@ const exportCmd = require('./lib/export.js')
 const listCmd = require('./lib/list.js')
 const showCmd = require('./lib/show.js')
 const deleteCmd = require('./lib/delete.js')
+const utils = require('./lib/utils.js')
 
 let argv = yargs
   .usage('Usage: ' + require.main.filename.split('/').pop().slice(0, -3) + ' <command> [options] <argument>')
@@ -28,6 +29,13 @@ let argv = yargs
     demandOption: false,
     requiresArg: false,
     description: 'suppress all non-error output',
+    type: 'boolean'
+  })
+  .option('j', {
+    alias: 'json',
+    demandOption: false,
+    requiresArg: false,
+    description: 'format all output as json',
     type: 'boolean'
   })
   .command('submit', 'submit a hash to be anchored', (yargs) => {
@@ -126,7 +134,7 @@ function parseCommand (yargs, argv) {
     let command = _.lowerCase(argv._[0])
     if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete'], command) < 0) {
       yargs.showHelp()
-      console.error(`Unknown command: ${command}`)
+      utils.log([`Unknown command: ${command}`], true, argv.quiet, argv.json)
     }
   }
 }
