@@ -13,6 +13,7 @@ const exportCmd = require('./lib/export.js')
 const listCmd = require('./lib/list.js')
 const showCmd = require('./lib/show.js')
 const deleteCmd = require('./lib/delete.js')
+const versionCmd = require('./lib/version.js')
 const utils = require('./lib/utils.js')
 const getStdin = require('get-stdin')
 
@@ -137,6 +138,12 @@ async function processArgsAsync () {
         .argv
       deleteCmd.execute(yargs, argv)
     })
+    .command('version', 'show the CLI version', (yargs) => {
+      let argv = yargs
+        .usage('Usage: version')
+        .argv
+      versionCmd.execute(yargs, argv)
+    })
     .demandCommand(1, 'You must specify a command.')
     .help('help', 'show help')
     .argv
@@ -151,7 +158,7 @@ function parseCommand (yargs, argv) {
   } else {
     // check for unknown command
     let command = _.lowerCase(argv._[0])
-    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete'], command) < 0) {
+    if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete', 'version'], command) < 0) {
       yargs.showHelp()
       utils.log([`Unknown command: ${command}`], true, argv.quiet, argv.json)
     }
