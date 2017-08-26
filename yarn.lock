@@ -102,6 +102,10 @@ binary-search-tree@0.2.5:
   dependencies:
     underscore "~1.4.4"
 
+blake2s-js@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/blake2s-js/-/blake2s-js-1.2.2.tgz#dda99631782e830528cfdbc458ca65bd4693b790"
+
 bluebird@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"

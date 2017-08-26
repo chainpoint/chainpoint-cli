@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/chainpoint/chainpoint-cli#readme",
   "dependencies": {
+    "blake2s-js": "^1.2.2",
     "bluebird": "^3.5.0",
     "chainpoint-binary": "^4.0.0",
     "chainpoint-proof-json-schema": "^1.0.0",
