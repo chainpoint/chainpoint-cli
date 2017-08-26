@@ -28,7 +28,7 @@ async function processArgsAsync () {
     }
   } catch (error) {
     yargs.showHelp()
-    utils.log([`Error reading from stdin: ${input}`], true, false, false)
+    console.error(`Error reading from stdin: ${input}`)
   }
 
   let argv = yargs
@@ -160,7 +160,7 @@ function parseCommand (yargs, argv) {
     let command = _.lowerCase(argv._[0])
     if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete', 'version'], command) < 0) {
       yargs.showHelp()
-      utils.log([`Unknown command: ${command}`], true, argv.quiet, argv.json)
+      console.error(`Unknown command: ${command}`)
     }
   }
 }
