@@ -14,7 +14,6 @@ const listCmd = require('./lib/list.js')
 const showCmd = require('./lib/show.js')
 const deleteCmd = require('./lib/delete.js')
 const versionCmd = require('./lib/version.js')
-const utils = require('./lib/utils.js')
 const getStdin = require('get-stdin')
 
 async function processArgsAsync () {
