@@ -38,7 +38,7 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
         'Content-Type': 'application/json'
       },
       method: 'GET',
-      uri: `http://${coreBaseURIs[x]}/nodes?healthy=1`,
+      uri: `http://${coreBaseURIs[x]}/nodes/random`,
       json: true,
       gzip: true,
       timeout: 1000,
@@ -46,19 +46,17 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
     }
     try {
       let response = await rp(options)
-      let healthyNodes = response.body
-      if (healthyNodes.length > 0) {
-        // randomize the order
-        healthyNodes = _.shuffle(healthyNodes)
+      let randomNodes = response.body
+      if (randomNodes.length > 0) {
         // assign nodeBaseURI and return
-        nodeBaseURI = healthyNodes[0].publicUri
+        nodeBaseURI = randomNodes[0].publicUri
         break
       }
     } catch (error) {
       continue
     }
   }
-  if (!nodeBaseURI) throw new Error('Unable to discover a healthy Node instance')
+  if (!nodeBaseURI) throw new Error('Unable to discover a random Node instance')
 
   return nodeBaseURI
 }
