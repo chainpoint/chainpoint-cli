@@ -49,7 +49,7 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
       let randomNodes = response.body
       if (randomNodes.length > 0) {
         // assign nodeBaseURI and return
-        nodeBaseURI = randomNodes[0].publicUri
+        nodeBaseURI = randomNodes[0].public_uri
         break
       }
     } catch (error) {
