@@ -1,8 +1,8 @@
 # Chainpoint CLI Client
 
-An easy to install, and easy to use, Command Line Interface (CLI) for the Tierion Network and the [Chainpoint](https://chainpoint.org) API.
+An easy to install, and easy to use, Command Line Interface (CLI) for submitting hashes, and managing proofs, on the Tierion Network.
 
-With this CLI you can submit hashes to a Chainpoint Node, anchoring them to public blockchains, and retrieve a cryptographic proof showing your hash was submitted and anchored.
+With this CLI you can submit hashes to a Tierion Network Node, anchor them to public blockchains, and retrieve a cryptographic proof showing your hash was submitted and anchored.
 
 This tool also provides a simple local datastore
 that helps keep track of every hash submitted, every `node_hash_id` returned, and stores and manages proofs locally for easy retrieval, export, and verification.
@@ -18,22 +18,25 @@ yarn global add chainpoint-cli
 ## Usage
 
 ```
-$ chainpoint
-Usage: chainpoint <command> [options] <argument>
+$ chp
+Usage: chp <command> [options] <argument>
 
 Commands:
-  submit  submit a hash to be anchored
-  update  retrieve an updated proof for your hash(es), if available
-  verify  verify a proof's anchor claims
-  import  import a proof
-  export  export a proof
-  list    display the status of every hash in the local database
-  show    show the proof for a hash_id_node
-  delete  delete a hash from the local database
+  submit   submit a hash to be anchored
+  update   retrieve an updated proof for your hash(es), if available
+  verify   verify a proof's anchor claims
+  import   import a proof
+  export   export a proof
+  list     display the status of every hash in the local database
+  show     show the proof for a hash_id_node
+  delete   delete a hash from the local database
+  version  show the CLI version
 
 Options:
   -s, --server  specify server to use
                                 [string] [default: "http://127.0.0.1:9090"]
+  -q, --quiet   suppress all non-error output                          [boolean]
+  -j, --json    format all output as json                              [boolean]
   --help        show help                                              [boolean]
 
 You must specify a command.
@@ -52,12 +55,12 @@ yarn
 ### Run It Locally
 
 ```
-./chainpoint.js
+./chp.js
 ```
 
 ### Install : Yarn
 
-You can install/uninstall the `chainpoint` from this repository globally with the following. This will install a Javascript
+You can install/uninstall the `chp` binary from this repository globally with the following. This will install a Javascript
 binary using Yarn:
 
 ```
