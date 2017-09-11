@@ -227,7 +227,7 @@ async function startAsync () {
       })
       .command('show', 'show the proof for a hash_id_node', (yargs) => {
         let argv = yargs
-          .usage('Usage: show <hash_id_node>')
+          .usage('Usage: show [hash_id_node]')
           .argv
         showCmd.executeAsync(yargs, argv)
       })
