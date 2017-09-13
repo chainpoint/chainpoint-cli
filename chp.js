@@ -109,7 +109,6 @@ async function startAsync () {
   const submitCmd = require('./lib/submit.js')
   const updateCmd = require('./lib/update.js')
   const verifyCmd = require('./lib/verify.js')
-  const importCmd = require('./lib/import.js')
   const exportCmd = require('./lib/export.js')
   const listCmd = require('./lib/list.js')
   const showCmd = require('./lib/show.js')
@@ -186,26 +185,6 @@ async function startAsync () {
           .argv
         verifyCmd.executeAsync(yargs, argv)
       })
-      .command('import', 'import a proof', (yargs) => {
-        let argv = yargs
-          .usage('Usage: import --proof <file>')
-          .option('p', {
-            alias: 'proof',
-            demandOption: true,
-            requiresArg: true,
-            description: 'read from proof file',
-            type: 'string'
-          })
-          .option('f', {
-            alias: 'force',
-            demandOption: false,
-            requiresArg: false,
-            description: 'overwrite existing data',
-            type: 'boolean'
-          })
-          .argv
-        importCmd.executeAsync(yargs, argv)
-      })
       .command('export', 'export a proof', (yargs) => {
         let argv = yargs
           .usage('Usage: export [options] <hash_id_node>')
@@ -257,7 +236,7 @@ async function startAsync () {
     } else {
       // check for unknown command
       let command = _.lowerCase(argv._[0])
-      if (_.indexOf(['submit', 'update', 'verify', 'import', 'export', 'list', 'show', 'delete', 'version'], command) < 0) {
+      if (_.indexOf(['submit', 'update', 'verify', 'export', 'list', 'show', 'delete', 'version'], command) < 0) {
         yargs.showHelp()
         console.error(`Unknown command: ${command}`)
       }

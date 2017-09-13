@@ -25,7 +25,6 @@ Commands:
   submit   submit a hash to be anchored
   update   retrieve an updated proof for your hash(es), if available
   verify   verify a proof's anchor claims
-  import   import a proof
   export   export a proof
   list     display the status of every hash in the local database
   show     show the proof for a hash_id_node
