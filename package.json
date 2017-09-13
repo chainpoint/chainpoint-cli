@@ -18,7 +18,8 @@
     "install-bin-linux-x64": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x64 /usr/local/bin/chp",
     "install-bin-linux-x86": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x86 /usr/local/bin/chp",
     "install-bin-alpine": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-alpine-x64 /usr/local/bin/chp",
-    "uninstall-bin": "rm -f /usr/local/bin/chp"
+    "uninstall-bin": "rm -f /usr/local/bin/chp",
+    "uninstall-all": "yarn uninstall-global-yarn; yarn uninstall-global-npm; yarn uninstall-bin"
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,6 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "pkg": "^4.1.1"
+    "pkg": "^4.2.4"
   }
 }
