@@ -74,7 +74,7 @@ You must specify a command.
 First you'll need to generate a hash of a local file or data
 of your choice. We recommended using the [SHA256](https://en.wikipedia.org/wiki/SHA-2) one-way cryptographic hash function. Other hash types will also be accepted as long as they are hex strings between 40 and 128 hex characters (`[0-9a-fA-F]`) in length.
 
-The Tierion network only sees a hash of your data, never the
+The Tierion Network only sees a hash of your data, never the
 original. It is not possible for us to learn anything about your
 data from the hash.
 
@@ -92,6 +92,12 @@ The `node_hash_id` is `e8892e30-992a-11e7-a296-01e28520c246` in this example. Th
 The original hash you submitted (`2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794`) is echoed back.
 
 The action that occurred, `submitted` in this case, is returned.
+
+You can also submit multiple hashes at once by calling `submit` with multiple hashes.
+
+```
+chp submit <hash> <hash> <hash>
+```
 
 ### Updating a hash
 
