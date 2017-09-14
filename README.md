@@ -1,12 +1,10 @@
-# Chainpoint CLI Client
+# Chainpoint CLI 
 
-An easy to install, easy to use, Command Line Interface (CLI) for submitting hashes, and managing proofs, on the Tierion Network.
+A Command Line Interface (CLI) for creating and verifying Chainpoint proofs. See https://chainpoint.org
 
-With this CLI you can submit hashes to a Tierion Node, which will in
-turn submit the hash to a Tierion Network Core. Core is responsible for
-anchoring the hash to public blockchains and generating proofs. The CLI
-will allow you to easily retrieve and verify a Chainpoint cryptographic
-proof that proves your hash was submitted and anchored at a point in time.
+The Chainpoint CLI lets you submit hashes to a Chainpoint Node on the Tierion Network. Nodes periodically aggregate hashes and send data to Tierion Core for anchoring the hash to public blockchains.
+
+The CLI lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
 
 The CLI also maintains a simple local database that keeps track of
 every hash you submit, and stores and manages Chainpoint proofs
@@ -35,11 +33,10 @@ which chp
 
 ## Usage
 
-You can get an overview of the CLI usage by simply typing the
-name of the command (`chp`). The Node that the CLI will
+You can get an overview of the CLI usage by typing the command (`chp`). The Node that the CLI will
 communicate with will be chosen from those advertised as healthy on the network.
 
-On first use the CLI will create a `~/.chainpoint` directory
+On first use, the CLI will create a `~/.chainpoint` directory
 where it will store `cli.config`, and `chainpoint-proofs.db`
 files. You can edit the `cli.config` file if you'd like to
 permanently specify a Node of your own choosing. The database
