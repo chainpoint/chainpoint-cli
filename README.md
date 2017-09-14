@@ -210,7 +210,7 @@ chp verify --json e8892e30-992a-11e7-a296-01e28520c246
 You should note that each of the sub-commands also has its own help screen.
 
 ```
-➜  chainpoint-cli git:(master) ✗ chp submit --help
+$ chp submit --help
 Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )
 
 Options:
