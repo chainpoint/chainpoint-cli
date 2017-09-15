@@ -1,5 +1,10 @@
 # Chainpoint CLI 
 
+[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+[![npm](https://img.shields.io/npm/l/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
+[![npm](https://img.shields.io/npm/v/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
+
 A Command Line Interface (CLI) for creating and verifying Chainpoint proofs. See https://chainpoint.org
 
 The Chainpoint CLI lets you submit hashes to a Chainpoint Node on the Tierion Network. Nodes periodically aggregate hashes and send data to Tierion Core for anchoring the hash to public blockchains.
