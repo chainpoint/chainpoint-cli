@@ -74,7 +74,7 @@ All set! Move on to installing the CLI.
 
 ### Installing
 
-Ensure you have Node.js version `7.0.0` or higher. If not, install a modern version, perhaps using the `nvm` install instructions above.
+Ensure you have Node.js version `7.6.0` or higher. If not, install a modern version, perhaps using the `nvm` install instructions above.
 
 ```
 node --version
