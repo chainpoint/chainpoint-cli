@@ -19,7 +19,7 @@ locally for easy retrieval, export, and verification.
 
 ### Prerequisites
 
-The CLI requires Node.js version 7 or higher.
+The CLI requires Node.js version 7.6.0 or higher.
 
 It is recommended to use a modern version of Node.js and its companion `npm` tool when installing the CLI.
 
