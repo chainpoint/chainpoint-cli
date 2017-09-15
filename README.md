@@ -17,12 +17,74 @@ locally for easy retrieval, export, and verification.
 
 ## Installation
 
+### Prerequisites
+
+The CLI requires Node.js version 7 or higher.
+
+It is recommended to use a modern version of Node.js and its companion `npm` tool when installing the CLI.
+
+An excellent way of doing so is to use the [Node Version Manager](https://github.com/creationix/nvm/blob/master/README.md) (`nvm`). Here are the quick install steps to get yourself set up with a current version of Node.js and `npm` using `nvm`.
+
+Install NVM (optional)
+
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
+```
+
+Once you run this installer its recommended to close your current terminal and open a new one to ensure the install takes effect.
+
+Now you can verify the install with this command, which should return the text `nvm`:
+
+```
+command -v nvm
+```
+
+Install the current Node.js and `npm`
+
+```
+nvm install node
+```
+
+Check the versions of Node and `npm` installed once the installation completes successfully. The version numbers you see might vary.
+
+```
+$ node --version
+v8.2.1
+$ npm --version
+5.3.0
+```
+
+Set this version of Node.js/`npm` to be your system default.
+
+```
+nvm alias default node
+```
+
+Confirm the version(s) of Node you've installed with `nvm`. The one that the arrow points to should not be `system` but one of the versions that `nvm` manages.
+
+```
+nvm list
+        v6.11.2
+->       v8.2.1
+         system
+default -> node (-> v8.2.1)
+```
+
+All set! Move on to installing the CLI.
+
+### Installing
+
+Ensure you have Node.js version `7.0.0` or higher. If not, install a modern version, perhaps using the `nvm` install instructions above.
+
+```
+node --version
+v8.2.1
+```
+
 We recommend globally installing the CLI from the
 [npmjs.com](https://www.npmjs.com/) package respository.
 
-Installing the CLI assumes you already have the `npm` command line tool,
-which is installed alongside Node.js. You can learn how to install
-`npm` at the [npmjs.com/get-npm](https://www.npmjs.com/get-npm) page.
+Installing the CLI assumes you already have the `npm` command line tool, which is installed alongside Node.js. You can learn how to install `npm` using the `nvm` Node Version Manager as shown above, or at the [npmjs.com/get-npm](https://www.npmjs.com/get-npm) page.
 
 ```
 npm install -g --production chainpoint-cli
@@ -35,6 +97,8 @@ and available with the command:
 ```
 which chp
 ```
+
+**Pro Tip**: Many of the `curl` samples in this document have been 'prettified' with [jq](https://stedolan.github.io/jq/) for easier readbility. It is a powerful tool that lets you work with and explore `JSON` on the command line in new and interesting ways. Highly recommended.
 
 ## Usage
 
