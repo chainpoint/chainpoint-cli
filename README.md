@@ -17,6 +17,8 @@ locally for easy retrieval, export, and verification.
 
 ## Installation
 
+Chainpoint CLI requires Node version 7.6.0 or higher.
+
 We recommend globally installing the CLI from the
 [npmjs.com](https://www.npmjs.com/) package respository.
 
