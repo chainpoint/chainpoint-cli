@@ -98,7 +98,7 @@ and available with the command:
 which chp
 ```
 
-**Pro Tip**: Many of the `curl` samples in this document have been 'prettified' with [jq](https://stedolan.github.io/jq/) for easier readbility. It is a powerful tool that lets you work with and explore `JSON` on the command line in new and interesting ways. Highly recommended.
+**Pro Tip**: You'll note that many of the `curl` samples in this document have been 'prettified' with [jq](https://stedolan.github.io/jq/) for easier readability. It is a powerful tool that lets you work with and explore `JSON` on the command line in new and interesting ways. Its highly recommended to [install this tool](https://stedolan.github.io/jq/download/) following the instructions for your platform.
 
 ## Usage
 
@@ -168,36 +168,37 @@ You can also submit multiple hashes at once by calling `submit` with multiple ha
 chp submit <hash> <hash> <hash>
 ```
 
-### Updating a hash
+### Updating a Proof
 
-Once a hash has been submitted, it will first be anchored to the `Calendar`. A proof that anchors your hash to the Calendar is generally available within ten seconds or less.
+Once a hash has been submitted, it will first be anchored to the `Calendar` and a proof will be generated. A proof that anchors your hash to the Calendar is generally available within ten seconds or less.
 
 ```
  chp update e8892e30-992a-11e7-a296-01e28520c246
 e8892e30-992a-11e7-a296-01e28520c246 | updated | cal
 ```
 
-You can see that you call `chp update` and just pass the hash ID as well.
+You can see that you call `chp update` and just pass the `node_hash_id` as well.
 
 You'll see echoed back to you the status, where the `cal` at the end indicates that the proof is anchored to the `Calendar`. Later you will see other blockchain anchors become available, such as `btc` to indicate that a
 hash was anchored to the Bitcoin blockchain.
 
 You can also call `chp update --all` to update all proofs locally stored.
 
-### Verifying a hash
+### Verifying a Proof
 
-Verifying a hash submits it to the Node for cryptographic verification that the hash captured in the proof is anchored all the way up to either the Calendar or to public blockchains. The Calendar contains all of the information needed to verify a proof.
+Verifying a proof submits it to the Node for cryptographic verification that the hash captured in the proof is anchored all the way up to either the Calendar or to public blockchains. The Calendar contains all of the information needed to verify a proof.
 
 ```
 chp verify e8892e30-992a-11e7-a296-01e28520c246
 e8892e30-992a-11e7-a296-01e28520c246 | verified | cal
 ```
 
-You can see here that the proof represented by the hash ID provided is anchored to the `cal` level.
+You can see here that the proof represented by the `node_hash_id` provided is anchored to the Calendar (`cal`) level.
 
-### Viewing a proof
+### Viewing a Proof
 
-You can of course view a proof in its entirety.
+You can of course view a proof in its entirety by asking
+to see the proof associated with a `node_hash_id`.
 
 ```
  chp show e8892e30-992a-11e7-a296-01e28520c246 | jq
