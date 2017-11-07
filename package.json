@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-cli",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Chainpoint CLI",
   "main": "chp.js",
   "bin": {
@@ -50,6 +50,7 @@
     "untildify": "^3.0.2",
     "uuid-time": "^1.0.0",
     "uuid-validate": "^0.0.2",
+    "valid-url": "^1.0.9",
     "yargs": "^8.0.2"
   },
   "devDependencies": {
