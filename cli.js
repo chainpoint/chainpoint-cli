@@ -70,7 +70,6 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
     }
   }
   if (!nodeBaseURI) throw new Error('Unable to discover a random Node instance')
-process.exit(0)
   return nodeBaseURI
 }
 
