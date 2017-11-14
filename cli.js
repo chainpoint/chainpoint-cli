@@ -54,7 +54,7 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
       uri: `http://${coreBaseURIs[x]}/nodes/random`,
       json: true,
       gzip: true,
-      timeout: 1000,
+      timeout: 5000,
       resolveWithFullResponse: true
     }
     try {
