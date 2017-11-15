@@ -12,7 +12,6 @@
 * limitations under the License.
 */
 
-const fs = require('fs')
 const utils = require('./lib/utils')
 const { promisify } = require('util')
 const dns = require('dns')
@@ -20,7 +19,6 @@ const rp = require('request-promise-native')
 const _ = require('lodash')
 const getStdin = require('get-stdin')
 const yargs = require('yargs')
-const config = require('./lib/config.js')
 
 async function discoverCoresAsync () {
   let resolveTxtAsync = promisify(dns.resolveTxt)
@@ -51,7 +49,7 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
         'Content-Type': 'application/json'
       },
       method: 'GET',
-      uri: `http://${coreBaseURIs[x]}/nodes/random`,
+      uri: `https://${coreBaseURIs[x]}/nodes/random`,
       json: true,
       gzip: true,
       timeout: 5000,
@@ -62,7 +60,7 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
       let randomNodes = response.body
       if (randomNodes.length > 0) {
         // assign nodeBaseURI and return
-        nodeBaseURI = randomNodes[0].public_uri
+        nodeBaseURI = _.shuffle(randomNodes)[0].public_uri
         break
       }
     } catch (error) {
@@ -70,40 +68,32 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
     }
   }
   if (!nodeBaseURI) throw new Error('Unable to discover a random Node instance')
-
   return nodeBaseURI
 }
 
-async function initConfigAsync () {
-  // Ensure that the target directory exists
-  if (!fs.existsSync(config.configDir)) {
-    fs.mkdirSync(config.configDir)
+async function parseBaseUriAsync (baseUri) {
+  // if the value supplied in --server or in cli.config is invalid, exit
+  if (!utils.isValidUrl(baseUri)) {
+    console.error(`Invalid server - ${baseUri}`)
+    process.exit(1)
   }
-  // Ensure that the target file exists
-  if (!fs.existsSync(config.pathToConfigFile)) {
-    // it doesnt, so discover Node URI to use and create the file
+  // if no value was specified in --server or in cli.config, get random uri
+  // http://0.0.0.0 is the env default, and represents a null setting
+  if (baseUri === 'http://0.0.0.0') {
     try {
       let coreBaseURIs = await discoverCoresAsync()
       let nodeBaseURI = await discoverRandomNodeAsync(coreBaseURIs)
-
-      let content = `CHAINPOINT_NODE_API_BASE_URI=${nodeBaseURI}`
-      utils.writeFile(config.pathToConfigFile, content)
+      return nodeBaseURI
     } catch (error) {
       console.error(error.message)
       process.exit(1)
     }
   }
+  // otherwise, return the valid value supplied with --server or in cli.config
+  return baseUri
 }
 
 async function startAsync () {
-  // create the configuration file if it does not already exist
-  try {
-    await initConfigAsync()
-  } catch (error) {
-    console.error(error.message)
-    process.exit(1)
-  }
-
   // load environment variables and commands
   const env = require('./lib/parse-env.js')
   const submitCmd = require('./lib/submit.js')
@@ -152,14 +142,15 @@ async function startAsync () {
         description: 'format all output as json',
         type: 'boolean'
       })
-      .command('submit', 'submit a hash to be anchored', (yargs) => {
+      .command('submit', 'submit a hash to be anchored', async (yargs) => {
         let argv = yargs
           .usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )')
           .string('_')
           .argv
+        argv.server = await parseBaseUriAsync(argv.server)
         submitCmd.executeAsync(yargs, argv)
       })
-      .command('update', 'retrieve an updated proof for your hash(es), if available', (yargs) => {
+      .command('update', 'retrieve an updated proof for your hash(es), if available', async (yargs) => {
         let argv = yargs
           .usage('Usage: update [options] <hash_id_node>')
           .option('a', {
@@ -172,7 +163,7 @@ async function startAsync () {
           .argv
         updateCmd.executeAsync(yargs, argv)
       })
-      .command('verify', 'verify a proof\'s anchor claims', (yargs) => {
+      .command('verify', 'verify a proof\'s anchor claims', async (yargs) => {
         let argv = yargs
           .usage('Usage: verify [options] <hash_id_node>')
           .option('a', {
@@ -183,9 +174,10 @@ async function startAsync () {
             type: 'boolean'
           })
           .argv
+        argv.server = await parseBaseUriAsync(argv.server)
         verifyCmd.executeAsync(yargs, argv)
       })
-      .command('export', 'export a proof', (yargs) => {
+      .command('export', 'export a proof', async (yargs) => {
         let argv = yargs
           .usage('Usage: export [options] <hash_id_node>')
           .option('b', {
@@ -196,6 +188,7 @@ async function startAsync () {
             type: 'boolean'
           })
           .argv
+        argv.server = await parseBaseUriAsync(argv.server)
         exportCmd.executeAsync(yargs, argv)
       })
       .command('list', 'display the status of every hash in the local database', (yargs) => {
