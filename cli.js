@@ -72,12 +72,12 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
 }
 
 async function parseBaseUriAsync (baseUri) {
-  // if the value supplied in --server or in cli.config is invalid, exit
+  // if the value supplied in --server or in chainpoint-cli.config is invalid, exit
   if (!utils.isValidUrl(baseUri)) {
     console.error(`Invalid server - ${baseUri}`)
     process.exit(1)
   }
-  // if no value was specified in --server or in cli.config, get random uri
+  // if no value was specified in --server or in chainpoint-cli.config, get random uri
   // http://0.0.0.0 is the env default, and represents a null setting
   if (baseUri === 'http://0.0.0.0') {
     try {
@@ -89,7 +89,7 @@ async function parseBaseUriAsync (baseUri) {
       process.exit(1)
     }
   }
-  // otherwise, return the valid value supplied with --server or in cli.config
+  // otherwise, return the valid value supplied with --server or in chainpoint-cli.config
   return baseUri
 }
 
@@ -104,6 +104,9 @@ async function startAsync () {
   const showCmd = require('./lib/show.js')
   const deleteCmd = require('./lib/delete.js')
   const versionCmd = require('./lib/version.js')
+
+  // remove old cli.config file if it exists
+  await utils.deleteOldConfig()
 
   async function processArgsAsync () {
     let input
