@@ -106,7 +106,7 @@ async function startAsync () {
   const versionCmd = require('./lib/version.js')
 
   // remove old cli.config file if it exists
-  await utils.deleteOldConfig()
+  utils.deleteOldConfig()
 
   async function processArgsAsync () {
     let input
