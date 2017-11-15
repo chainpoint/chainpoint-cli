@@ -64,8 +64,6 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
         break
       }
     } catch (error) {
-      console.log(coreBaseURIs[x])
-      console.log(error.message)
       continue
     }
   }
