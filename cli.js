@@ -52,7 +52,7 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
       uri: `https://${coreBaseURIs[x]}/nodes/random`,
       json: true,
       gzip: true,
-      timeout: 2500,
+      timeout: 5000,
       resolveWithFullResponse: true
     }
     try {
