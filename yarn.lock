@@ -157,6 +157,14 @@ chainpoint-binary@^4.0.0:
     msgpack-lite "^0.1.26"
     pako "^1.0.5"
 
+chainpoint-parse@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-2.1.0.tgz#586520a57d4d7098e7a61ed95ee7c89612deab79"
+  dependencies:
+    chainpoint-binary "^4.0.0"
+    chainpoint-proof-json-schema "^1.0.0"
+    js-sha3 "^0.5.7"
+
 chainpoint-proof-json-schema@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-1.0.0.tgz#39795322e3619724766638fce6de8c8632f3d25a"
@@ -601,6 +609,10 @@ isstream@~0.1.2:
 jmespath@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
+
+js-sha3@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.5.7.tgz#0d4ffd8002d5333aabaf4a23eed2f6374c9f28e7"
 
 jsbn@~0.1.0:
   version "0.1.1"
