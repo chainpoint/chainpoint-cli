@@ -41,8 +41,11 @@ async function discoverCoresAsync () {
   return _.shuffle(coreBaseURIs)
 }
 
-async function discoverRandomNodeAsync (coreBaseURIs) {
-  let nodeBaseURI
+async function discoverRandomNodesAsync (coreBaseURIs, nodeTotal = 1) {
+  // 5 nodes is the maximum received from Core's /nodes/random endpoint
+  if (nodeTotal > 5) nodeTotal = 5
+
+  let nodeBaseURIs
   for (let x = 0; x < coreBaseURIs.length; x++) {
     let options = {
       headers: {
@@ -59,16 +62,16 @@ async function discoverRandomNodeAsync (coreBaseURIs) {
       let response = await rp(options)
       let randomNodes = response.body
       if (randomNodes.length > 0) {
-        // assign nodeBaseURI and return
-        nodeBaseURI = _.shuffle(randomNodes)[0].public_uri
+        // assign nodeBaseURIs and return
+        nodeBaseURIs = _.sampleSize(randomNodes, nodeTotal).map((randomNode) => { return randomNode.public_uri })
         break
       }
     } catch (error) {
       continue
     }
   }
-  if (!nodeBaseURI) throw new Error('Unable to discover a random Node instance')
-  return nodeBaseURI
+  if (nodeBaseURIs.length < 1) throw new Error('Unable to discover a random Node instance')
+  return nodeBaseURIs
 }
 
 async function parseBaseUriAsync (baseUri) {
@@ -82,15 +85,15 @@ async function parseBaseUriAsync (baseUri) {
   if (baseUri === 'http://0.0.0.0') {
     try {
       let coreBaseURIs = await discoverCoresAsync()
-      let nodeBaseURI = await discoverRandomNodeAsync(coreBaseURIs)
-      return nodeBaseURI
+      let nodeBaseURIs = await discoverRandomNodesAsync(coreBaseURIs, 3)
+      return nodeBaseURIs
     } catch (error) {
       console.error(error.message)
       process.exit(1)
     }
   }
-  // otherwise, return the valid value supplied with --server or in chainpoint-cli.config
-  return baseUri
+  // otherwise, return the valid value supplied with --server or in chainpoint-cli.config as a one element array
+  return [baseUri]
 }
 
 async function startAsync () {
