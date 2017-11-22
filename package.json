@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/chainpoint/chainpoint-cli#readme",
   "dependencies": {
+    "async": "^2.6.0",
     "async-await-parallel": "^1.0.0",
     "blake2s-js": "^1.2.2",
     "bluebird": "^3.5.0",
