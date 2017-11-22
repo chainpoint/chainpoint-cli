@@ -148,7 +148,7 @@ async function startAsync () {
         description: 'format all output as json',
         type: 'boolean'
       })
-      .command('submit', 'submit a hash to be anchored', async (yargs) => {
+      .command('submit', 'submit a hash to be anchored (3x Nodes default)', async (yargs) => {
         let argv = yargs
           .usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )')
           .string('_')
