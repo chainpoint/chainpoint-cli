@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-cli",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Chainpoint CLI",
   "main": "chp.js",
   "bin": {
@@ -40,7 +40,7 @@
     "blake2s-js": "^1.2.2",
     "bluebird": "^3.5.0",
     "chainpoint-binary": "^4.0.0",
-    "chainpoint-parse": "^2.1.0",
+    "chainpoint-parse": "^3.0.1",
     "chainpoint-proof-json-schema": "^1.0.0",
     "envalid": "^3.1.1",
     "get-stdin": "^5.0.1",
