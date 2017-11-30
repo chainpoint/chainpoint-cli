@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-cli",
-  "version": "1.0.5",
+  "version": "1.2.0",
   "description": "Chainpoint CLI",
   "main": "chp.js",
   "bin": {
@@ -35,9 +35,12 @@
   },
   "homepage": "https://github.com/chainpoint/chainpoint-cli#readme",
   "dependencies": {
+    "async": "^2.6.0",
+    "async-await-parallel": "^1.0.0",
     "blake2s-js": "^1.2.2",
     "bluebird": "^3.5.0",
     "chainpoint-binary": "^4.0.0",
+    "chainpoint-parse": "^3.0.1",
     "chainpoint-proof-json-schema": "^1.0.0",
     "envalid": "^3.1.1",
     "get-stdin": "^5.0.1",
@@ -50,6 +53,7 @@
     "untildify": "^3.0.2",
     "uuid-time": "^1.0.0",
     "uuid-validate": "^0.0.2",
+    "valid-url": "^1.0.9",
     "yargs": "^8.0.2"
   },
   "devDependencies": {

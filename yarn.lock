@@ -65,9 +65,19 @@ ast-types@0.8.15:
   version "0.8.15"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.8.15.tgz#8eef0827f04dff0ec8857ba925abe3fea6194e52"
 
+async-await-parallel@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/async-await-parallel/-/async-await-parallel-1.0.0.tgz#4913b0e0abfbec934a579331f8d8d75e31b0d349"
+
 async@0.2.10:
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
+
+async@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
+  dependencies:
+    lodash "^4.14.0"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -152,6 +162,14 @@ chainpoint-binary@^4.0.0:
     chainpoint-proof-json-schema "^1.0.0"
     msgpack-lite "^0.1.26"
     pako "^1.0.5"
+
+chainpoint-parse@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-3.0.1.tgz#bd8aac62c6ecf859563a67080a9cdbd368c00ed1"
+  dependencies:
+    chainpoint-binary "^4.0.0"
+    chainpoint-proof-json-schema "^1.0.0"
+    js-sha3 "^0.5.7"
 
 chainpoint-proof-json-schema@^1.0.0:
   version "1.0.0"
@@ -598,6 +616,10 @@ jmespath@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
 
+js-sha3@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.5.7.tgz#0d4ffd8002d5333aabaf4a23eed2f6374c9f28e7"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -691,7 +713,7 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash@^4.13.1, lodash@^4.17.4:
+lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -1289,6 +1311,10 @@ uuid-validate@^0.0.2:
 uuid@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
+
+valid-url@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/valid-url/-/valid-url-1.0.9.tgz#1c14479b40f1397a75782f115e4086447433a200"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"
