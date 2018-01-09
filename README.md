@@ -151,12 +151,12 @@ To submit a hash, simply call:
 
 ```
 chp submit 2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794
-e8892e30-992a-11e7-a296-01e28520c246 | 2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794 | submitted
+52eb62c0-f556-11e7-bcf8-016fed1c55ad | 2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794 | submitted
 ```
 
 The output returned consists of three parts:
 
-The `node_hash_id` is `e8892e30-992a-11e7-a296-01e28520c246` in this example. This type 1 UUID serves as a handle to retrieve a proof.
+The `node_hash_id` is `52eb62c0-f556-11e7-bcf8-016fed1c55ad` in this example. This type 1 UUID serves as a handle to retrieve a proof.
 
 The original hash you submitted (`2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794`) is echoed back.
 
@@ -173,8 +173,8 @@ chp submit <hash> <hash> <hash>
 Once a hash has been submitted, it will first be anchored to the `Calendar` and a proof will be generated. A proof that anchors your hash to the Calendar is generally available within ten seconds or less.
 
 ```
- chp update e8892e30-992a-11e7-a296-01e28520c246
-e8892e30-992a-11e7-a296-01e28520c246 | updated | cal
+chp update 52eb62c0-f556-11e7-bcf8-016fed1c55ad
+52eb62c0-f556-11e7-bcf8-016fed1c55ad | updated | cal
 ```
 
 You can see that you call `chp update` and just pass the `node_hash_id` as well.
@@ -189,8 +189,8 @@ You can also call `chp update --all` to update all proofs locally stored.
 Verifying a proof submits it to the Node for cryptographic verification that the hash captured in the proof is anchored all the way up to either the Calendar or to public blockchains. The Calendar contains all of the information needed to verify a proof.
 
 ```
-chp verify e8892e30-992a-11e7-a296-01e28520c246
-e8892e30-992a-11e7-a296-01e28520c246 | verified | cal
+chp verify 52eb62c0-f556-11e7-bcf8-016fed1c55ad
+52eb62c0-f556-11e7-bcf8-016fed1c55ad | verified | cal
 ```
 
 You can see here that the proof represented by the `node_hash_id` provided is anchored to the Calendar (`cal`) level.
@@ -201,43 +201,43 @@ You can of course view a proof in its entirety by asking
 to see the proof associated with a `node_hash_id`.
 
 ```
- chp show e8892e30-992a-11e7-a296-01e28520c246 | jq
+chp show 52eb62c0-f556-11e7-bcf8-016fed1c55ad | jq
 
 {
   "@context": "https://w3id.org/chainpoint/v3",
   "type": "Chainpoint",
   "hash": "2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794",
-  "hash_id_node": "e8892e30-992a-11e7-a296-01e28520c246",
-  "hash_submitted_node_at": "2017-09-14T08:58:42Z",
-  "hash_id_core": "e89f7550-992a-11e7-b9a4-013cacb0360d",
-  "hash_submitted_core_at": "2017-09-14T08:58:42Z",
+  "hash_id_node": "52eb62c0-f556-11e7-bcf8-016fed1c55ad",
+  "hash_submitted_node_at": "2018-01-09T16:01:16Z",
+  "hash_id_core": "534fc9e0-f556-11e7-b0bd-016959c78193",
+  "hash_submitted_core_at": "2018-01-09T16:01:17Z",
   "branches": [
     {
       "label": "cal_anchor_branch",
       "ops": [
         {
-          "l": "node_id:e8892e30-992a-11e7-a296-01e28520c246"
+          "l": "node_id:52eb62c0-f556-11e7-bcf8-016fed1c55ad"
         },
         {
           "op": "sha-256"
         },
         {
-          "l": "core_id:e89f7550-992a-11e7-b9a4-013cacb0360d"
+          "l": "core_id:534fc9e0-f556-11e7-b0bd-016959c78193"
         },
         {
           "op": "sha-256"
         },
         {
-          "l": "nist:1505379480:07be37c4ef9ef7a74dc16406eb054e02de3b89d23e1cbd8ff991bb811c0f2b3f596573849963554ff222c92ee643c2598e78022d4ab4af5df2422c836d89365c"
+          "l": "nist:1515513660:042c2248a9b3af5f1d33f64bb3f8d6a2d1028409b9a028538cca63521e79aeb684f3a48cdbf2074cbf48e54fcd3375703d1ad56602e326a3805ebf1066f7aaff"
         },
         {
           "op": "sha-256"
         },
         {
-          "l": "3876:1505379530:1:https://a.chainpoint.org:cal:3876"
+          "l": "986719:1515513680:1:https://b.chainpoint.org:cal:986719"
         },
         {
-          "r": "0108f16b4520cfc45399067480dce73107f758132622249ef3f50ce908e2f002"
+          "r": "4d8c2a7eab273ac9a7aa32e3c35805a4eaac3652be27142f8b459dd61737ab06"
         },
         {
           "op": "sha-256"
@@ -246,9 +246,9 @@ to see the proof associated with a `node_hash_id`.
           "anchors": [
             {
               "type": "cal",
-              "anchor_id": "3876",
+              "anchor_id": "986719",
               "uris": [
-                "https://a.chainpoint.org/calendar/3876/hash"
+                "https://b.chainpoint.org/calendar/986719/hash"
               ]
             }
           ]
@@ -272,7 +272,7 @@ You can see in this case I piped the output of the `show` sub-command to the `jq
 You can also get JSON output by passing in the `--json` flag. For example:
 
 ```
-chp verify --json e8892e30-992a-11e7-a296-01e28520c246
+chp verify --json 52eb62c0-f556-11e7-bcf8-016fed1c55ad
 ```
 
 ### Help
