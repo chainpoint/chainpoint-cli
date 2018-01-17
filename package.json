@@ -49,7 +49,6 @@
     "lodash": "^4.17.4",
     "nedb": "^1.8.0",
     "request": "^2.81.0",
-    "request-promise-native": "^1.0.4",
     "semver": "^5.4.1",
     "untildify": "^3.0.2",
     "uuid-time": "^1.0.0",
