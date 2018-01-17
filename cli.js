@@ -13,66 +13,10 @@
 */
 
 const utils = require('./lib/utils')
-const { promisify } = require('util')
-const dns = require('dns')
-const rp = require('request-promise-native')
 const _ = require('lodash')
 const getStdin = require('get-stdin')
 const yargs = require('yargs')
-
-async function discoverCoresAsync () {
-  let resolveTxtAsync = promisify(dns.resolveTxt)
-
-  // retrieve Core URI txt entries from chainpoint.org DNS
-  let hosts
-  try {
-    hosts = await resolveTxtAsync('_core.addr.chainpoint.org')
-  } catch (error) {
-    throw new Error(`Could not query chainpoint.org DNS : ${error.message}`)
-  }
-  if (hosts.length === 0) throw new Error('Unable to discover a Core instance')
-
-  // convert results to single dimension array
-  let coreBaseURIs = hosts.map((hostArray) => {
-    return hostArray[0]
-  })
-
-  // randomize order and return
-  return _.shuffle(coreBaseURIs)
-}
-
-async function discoverRandomNodesAsync (coreBaseURIs, nodeTotal = 1) {
-  // 5 nodes is the maximum received from Core's /nodes/random endpoint
-  if (nodeTotal > 5) nodeTotal = 5
-
-  let nodeBaseURIs
-  for (let x = 0; x < coreBaseURIs.length; x++) {
-    let options = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'GET',
-      uri: `https://${coreBaseURIs[x]}/nodes/random`,
-      json: true,
-      gzip: true,
-      timeout: 5000,
-      resolveWithFullResponse: true
-    }
-    try {
-      let response = await rp(options)
-      let randomNodes = response.body
-      if (randomNodes.length > 0) {
-        // assign nodeBaseURIs and return
-        nodeBaseURIs = _.sampleSize(randomNodes, nodeTotal).map((randomNode) => { return randomNode.public_uri })
-        break
-      }
-    } catch (error) {
-      continue
-    }
-  }
-  if (nodeBaseURIs.length < 1) throw new Error('Unable to discover a random Node instance')
-  return nodeBaseURIs
-}
+const chp = require('chainpoint-client')
 
 async function parseBaseUriAsync (baseUri) {
   // if the value supplied in --server or in chainpoint-cli.config is invalid, exit
@@ -84,8 +28,7 @@ async function parseBaseUriAsync (baseUri) {
   // http://0.0.0.0 is the env default, and represents a null setting
   if (baseUri === 'http://0.0.0.0') {
     try {
-      let coreBaseURIs = await discoverCoresAsync()
-      let nodeBaseURIs = await discoverRandomNodesAsync(coreBaseURIs, 3)
+      let nodeBaseURIs = await chp.getNodes(3)
       return nodeBaseURIs
     } catch (error) {
       console.error(error.message)
