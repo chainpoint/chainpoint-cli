@@ -119,18 +119,18 @@ $ chp
 Usage: chp <command> [options] <argument>
 
 Commands:
-  submit   submit a hash to be anchored
-  update   retrieve an updated proof for your hash(es), if available
-  verify   verify a proof's anchor claims
-  export   export a proof
-  list     display the status of every hash in the local database
-  show     show the proof for a hash_id_node
-  delete   delete a hash from the local database
-  version  show the CLI version
+  submit    submit a hash to be anchored (3x Nodes default)
+  update    retrieve an updated proof for your hash(es), if available
+  verify    verify a proof's anchor claims
+  evaluate  evaluate and display a proof's anchor claims
+  export    export a proof
+  list      display the status of every hash in the local database
+  show      show the proof for a hash_id_node
+  delete    delete a hash from the local database
+  version   show the CLI version
 
 Options:
-  -s, --server  specify server to use
-                                  [string] [default: "http://SERVER"]
+  -s, --server  specify server to use[string] [default: "http://0.0.0.0"]
   -q, --quiet   suppress all non-error output                          [boolean]
   -j, --json    format all output as json                              [boolean]
   --help        show help                                              [boolean]
@@ -268,6 +268,8 @@ You can see in this case I piped the output of the `show` sub-command to the `jq
 `export` allows you to export a proof in either JSON or binary file formats.
 
 `delete <hash_id>` allows you to manually delete any hash from your local DB.
+
+`evaluate <hash_id>` calculates and displays the expected values for each anchor in the proof.
 
 You can also get JSON output by passing in the `--json` flag. For example:
 

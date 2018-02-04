@@ -45,6 +45,7 @@ async function startAsync () {
   const submitCmd = require('./lib/submit.js')
   const updateCmd = require('./lib/update.js')
   const verifyCmd = require('./lib/verify.js')
+  const evaluateCmd = require('./lib/evaluate.js')
   const exportCmd = require('./lib/export.js')
   const listCmd = require('./lib/list.js')
   const showCmd = require('./lib/show.js')
@@ -126,6 +127,20 @@ async function startAsync () {
         argv.server = await parseBaseUriAsync(argv.server)
         verifyCmd.executeAsync(yargs, argv)
       })
+      .command('evaluate', 'evaluate and display a proof\'s anchor claims', async (yargs) => {
+        let argv = yargs
+          .usage('Usage: evaluate [options] <hash_id_node>')
+          .option('a', {
+            alias: 'all',
+            demandOption: false,
+            requiresArg: false,
+            description: 'process all items in local database',
+            type: 'boolean'
+          })
+          .argv
+        argv.server = await parseBaseUriAsync(argv.server)
+        evaluateCmd.executeAsync(yargs, argv)
+      })
       .command('export', 'export a proof', async (yargs) => {
         let argv = yargs
           .usage('Usage: export [options] <hash_id_node>')
@@ -178,7 +193,7 @@ async function startAsync () {
     } else {
       // check for unknown command
       let command = _.lowerCase(argv._[0])
-      if (_.indexOf(['submit', 'update', 'verify', 'export', 'list', 'show', 'delete', 'version'], command) < 0) {
+      if (_.indexOf(['submit', 'update', 'verify', 'evaluate', 'export', 'list', 'show', 'delete', 'version'], command) < 0) {
         yargs.showHelp()
         console.error(`Unknown command: ${command}`)
       }
