@@ -39,7 +39,7 @@
     "blake2s-js": "^1.2.2",
     "bluebird": "^3.5.0",
     "chainpoint-binary": "^4.0.0",
-    "chainpoint-client": "^0.1.0",
+    "chainpoint-client": "^0.1.1",
     "chainpoint-proof-json-schema": "^1.0.0",
     "envalid": "^3.1.1",
     "get-stdin": "^5.0.1",
