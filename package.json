@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-cli",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Chainpoint CLI",
   "main": "chp.js",
   "bin": {
@@ -10,16 +10,14 @@
     "build": "yarn build-clean && ./node_modules/.bin/pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
     "build-debug": "yarn build-clean && ./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
     "build-clean": "rm -f ./build/*",
-    "install-global-yarn": "yarn global add file:$(pwd)",
-    "install-global-npm": "npm install -g --production",
-    "uninstall-global-yarn": "cd ~/.config/yarn/global && yarn global remove chainpoint-cli",
-    "uninstall-global-npm": "npm uninstall -g chainpoint-cli",
+    "install-npm": "npm install -g --production",
+    "uninstall-npm": "npm uninstall -g chainpoint-cli",
+    "install": "yarn install-bin-macos",
     "install-bin-macos": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-macos-x64 /usr/local/bin/chp",
     "install-bin-linux-x64": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x64 /usr/local/bin/chp",
     "install-bin-linux-x86": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x86 /usr/local/bin/chp",
     "install-bin-alpine": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-alpine-x64 /usr/local/bin/chp",
-    "uninstall-bin": "rm -f /usr/local/bin/chp",
-    "uninstall-all": "yarn uninstall-global-yarn; yarn uninstall-global-npm; yarn uninstall-bin"
+    "uninstall-bin": "rm -f /usr/local/bin/chp"
   },
   "repository": {
     "type": "git",
@@ -39,7 +37,7 @@
     "blake2s-js": "^1.2.2",
     "bluebird": "^3.5.0",
     "chainpoint-binary": "^4.0.0",
-    "chainpoint-client": "^0.1.0",
+    "chainpoint-client": "^0.1.2",
     "chainpoint-proof-json-schema": "^1.0.0",
     "envalid": "^3.1.1",
     "get-stdin": "^5.0.1",
