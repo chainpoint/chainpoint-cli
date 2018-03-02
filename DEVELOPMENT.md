@@ -19,24 +19,14 @@ yarn
 ./chp.js
 ```
 
-### Install w/ Yarn
-
-You can install/uninstall the `chp` binary from this repository globally with the following. This will install a Javascript
-binary using Yarn:
-
-```
-yarn install-global-yarn
-yarn uninstall-global-yarn
-```
-
 ### Install w/ NPM
 
 You can install/uninstall the `chp` binary from this repository globally with the following. This will install a Javascript
 binary using NPM:
 
 ```
-yarn install-global-npm
-yarn uninstall-global-npm
+yarn install-npm
+yarn uninstall-npm
 ```
 
 ### Install : Binary Single-File Executables
