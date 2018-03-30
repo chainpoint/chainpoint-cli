@@ -16,7 +16,6 @@ const utils = require('./lib/utils')
 const _ = require('lodash')
 const getStdin = require('get-stdin')
 const yargs = require('yargs')
-const chp = require('chainpoint-client')
 
 async function parseBaseUriAsync (baseUri) {
   // if the value supplied in --server or in chainpoint-cli.config is invalid, exit
@@ -24,19 +23,12 @@ async function parseBaseUriAsync (baseUri) {
     console.error(`Invalid server - ${baseUri}`)
     process.exit(1)
   }
-  // if no value was specified in --server or in chainpoint-cli.config, get random uri
+  // if no value was specified in --server or in chainpoint-cli.config, let the chainpint-client select node(s)
   // http://0.0.0.0 is the env default, and represents a null setting
-  if (baseUri === 'http://0.0.0.0') {
-    try {
-      let nodeBaseURIs = await chp.getNodes(3)
-      return nodeBaseURIs
-    } catch (error) {
-      console.error(error.message)
-      process.exit(1)
-    }
-  }
+  if (baseUri === 'http://0.0.0.0') return null
+
   // otherwise, return the valid value supplied with --server or in chainpoint-cli.config as a one element array
-  return [baseUri]
+  return baseUri
 }
 
 async function startAsync () {
@@ -138,7 +130,6 @@ async function startAsync () {
             type: 'boolean'
           })
           .argv
-        argv.server = await parseBaseUriAsync(argv.server)
         evaluateCmd.executeAsync(yargs, argv)
       })
       .command('export', 'export a proof', async (yargs) => {
@@ -152,7 +143,6 @@ async function startAsync () {
             type: 'boolean'
           })
           .argv
-        argv.server = await parseBaseUriAsync(argv.server)
         exportCmd.executeAsync(yargs, argv)
       })
       .command('list', 'display the status of every hash in the local database', (yargs) => {
