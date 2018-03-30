@@ -194,9 +194,9 @@ chainpoint-binary@^4.0.1:
     msgpack-lite "^0.1.26"
     pako "^1.0.5"
 
-chainpoint-client@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.1.3.tgz#30a9b50fabbaaf4a314fd41ad0c02ace925687e8"
+chainpoint-client@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.1.4.tgz#6e355fc4a42a2a1ba883dfb4c534b4564653b88b"
   dependencies:
     bluebird "^3.5.1"
     chainpoint-binary "^4.0.1"
