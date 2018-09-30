@@ -7,16 +7,35 @@
     "chp": "./chp.js"
   },
   "scripts": {
-    "build": "yarn build-clean && ./node_modules/.bin/pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
-    "build-debug": "yarn build-clean && ./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
-    "build-clean": "rm -f ./build/*",
+    "build": "yarn run build:clean && pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
+    "build-debug": "yarn build:clean && ./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
+    "build:clean": "rimraf ./build/*",
     "install-npm": "npm install -g --production",
     "uninstall-npm": "npm uninstall -g chainpoint-cli",
     "install-bin-macos": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-macos-x64 /usr/local/bin/chp",
     "install-bin-linux-x64": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x64 /usr/local/bin/chp",
     "install-bin-linux-x86": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-linux-x86 /usr/local/bin/chp",
     "install-bin-alpine": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-alpine-x64 /usr/local/bin/chp",
-    "uninstall-bin": "rm -f /usr/local/bin/chp"
+    "uninstall-bin": "rm -f /usr/local/bin/chp",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
+    "lint": "eslint **/*.js",
+    "test": "yarn run lint",
+    "mocha": "mocha tests/ --recursive -R spec"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -52,6 +71,14 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
-    "pkg": "^4.2.4"
+    "eslint": "^5.6.1",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^2.7.0",
+    "husky": "^1.0.1",
+    "lint-staged": "^7.3.0",
+    "mocha": "^5.2.0",
+    "pkg": "^4.2.4",
+    "prettier": "^1.14.3",
+    "rimraf": "^2.6.2"
   }
 }

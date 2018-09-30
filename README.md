@@ -1,7 +1,8 @@
-# Chainpoint CLI 
+# Chainpoint CLI
 
-[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/chainpoint/chainpoint-cli.svg?branch=master)](https://travis-ci.org/chainpoint/chainpoint-cli)
 [![npm](https://img.shields.io/npm/l/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 [![npm](https://img.shields.io/npm/v/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 
@@ -110,9 +111,9 @@ where it will store its `chainpoint-proofs.db`
 file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
 you submit, which Node it was submitted to, and a copy of the
-proofs. You can create a `chainpoint-cli.config` file in this directory 
+proofs. You can create a `chainpoint-cli.config` file in this directory
 with a `CHAINPOINT_NODE_API_BASE_URI=` value if you'd like to
-permanently specify a Node of your own choosing. 
+permanently specify a Node of your own choosing.
 
 ```
 $ chp
@@ -291,4 +292,4 @@ Options:
   -q, --quiet   suppress all non-error output                          [boolean]
   -j, --json    format all output as json                              [boolean]
   --help        show help                                              [boolean]
-  ```
+```
