@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-cli",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Chainpoint CLI",
   "main": "chp.js",
   "bin": {
