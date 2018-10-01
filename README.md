@@ -34,7 +34,7 @@ These binaries are created with the [pkg](https://github.com/zeit/pkg#readme) to
 Install & Run
 
 ```
-$ wget https://github.com/chainpoint/chainpoint-cli/releases/download/v1.4.4/chainpoint-cli-macos-x64 -O chp && chmod 755 chp
+$ wget https://github.com/chainpoint/chainpoint-cli/releases/download/v1.4.6/chainpoint-cli-macos-x64 -O chp && chmod 755 chp
 
 $ ./chp
 Usage: chp <command> [options] <argument>
