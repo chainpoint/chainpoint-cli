@@ -1,7 +1,8 @@
-# Chainpoint CLI 
+# Chainpoint CLI
 
-[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/chainpoint/chainpoint-cli.svg?branch=master)](https://travis-ci.org/chainpoint/chainpoint-cli)
 [![npm](https://img.shields.io/npm/l/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 [![npm](https://img.shields.io/npm/v/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 
@@ -17,88 +18,28 @@ locally for easy retrieval, export, and verification.
 
 ## Installation
 
-### Prerequisites
+### Easy Install
 
-The CLI requires Node.js version 7.6.0 or higher.
+Git tagged releases are automatically built as a single-file binary and uploaded as Github releases. Binaries are compiled for:
 
-It is recommended to use a modern version of Node.js and its companion `npm` tool when installing the CLI.
+- Alpine Linux (x64)
+- Linux (x64)
+- Linux (x86)
+- macOS (x64)
 
-An excellent way of doing so is to use the [Node Version Manager](https://github.com/creationix/nvm/blob/master/README.md) (`nvm`). Here are the quick install steps to get yourself set up with a current version of Node.js and `npm` using `nvm`.
+You can find the most current releases at [https://github.com/chainpoint/chainpoint-cli/releases](https://github.com/chainpoint/chainpoint-cli/releases)
 
-Install NVM (optional)
+These binaries are created with the [pkg](https://github.com/zeit/pkg#readme) tool and have no pre-requisites. It is _not_ necessary to install even Node.js as it is packaged in the binary. Installation is a simple matter of downloading the appropriate file, giving it execute permissions, and running it from a location on your `PATH`.
 
-```
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
-```
-
-Once you run this installer its recommended to close your current terminal and open a new one to ensure the install takes effect.
-
-Now you can verify the install with this command, which should return the text `nvm`:
+Install & Run
 
 ```
-command -v nvm
+$ wget https://github.com/chainpoint/chainpoint-cli/releases/download/v1.4.4/chainpoint-cli-macos-x64 -O chp && chmod 755 chp
+
+$ ./chp
+Usage: chp <command> [options] <argument>
+...
 ```
-
-Install the current Node.js and `npm`
-
-```
-nvm install node
-```
-
-Check the versions of Node and `npm` installed once the installation completes successfully. The version numbers you see might vary.
-
-```
-$ node --version
-v8.2.1
-$ npm --version
-5.3.0
-```
-
-Set this version of Node.js/`npm` to be your system default.
-
-```
-nvm alias default node
-```
-
-Confirm the version(s) of Node you've installed with `nvm`. The one that the arrow points to should not be `system` but one of the versions that `nvm` manages.
-
-```
-nvm list
-        v6.11.2
-->       v8.2.1
-         system
-default -> node (-> v8.2.1)
-```
-
-All set! Move on to installing the CLI.
-
-### Installing
-
-Ensure you have Node.js version `7.6.0` or higher. If not, install a modern version, perhaps using the `nvm` install instructions above.
-
-```
-node --version
-v8.2.1
-```
-
-We recommend globally installing the CLI from the
-[npmjs.com](https://www.npmjs.com/) package respository.
-
-Installing the CLI assumes you already have the `npm` command line tool, which is installed alongside Node.js. You can learn how to install `npm` using the `nvm` Node Version Manager as shown above, or at the [npmjs.com/get-npm](https://www.npmjs.com/get-npm) page.
-
-```
-npm install -g --production chainpoint-cli
-```
-
-This will install the `chainpoint-cli` npm package, which installs
-the `chp` command line tool. You can check that `chp` is installed
-and available with the command:
-
-```
-which chp
-```
-
-**Pro Tip**: You'll note that many of the `curl` samples in this document have been 'prettified' with [jq](https://stedolan.github.io/jq/) for easier readability. It is a powerful tool that lets you work with and explore `JSON` on the command line in new and interesting ways. Its highly recommended to [install this tool](https://stedolan.github.io/jq/download/) following the instructions for your platform.
 
 ## Usage
 
@@ -110,9 +51,9 @@ where it will store its `chainpoint-proofs.db`
 file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
 you submit, which Node it was submitted to, and a copy of the
-proofs. You can create a `chainpoint-cli.config` file in this directory 
+proofs. You can create a `chainpoint-cli.config` file in this directory
 with a `CHAINPOINT_NODE_API_BASE_URI=` value if you'd like to
-permanently specify a Node of your own choosing. 
+permanently specify a Node of your own choosing.
 
 ```
 $ chp
@@ -291,4 +232,4 @@ Options:
   -q, --quiet   suppress all non-error output                          [boolean]
   -j, --json    format all output as json                              [boolean]
   --help        show help                                              [boolean]
-  ```
+```
