@@ -8,7 +8,7 @@
 
 A Command Line Interface (CLI) for creating and verifying Chainpoint proofs. See https://chainpoint.org
 
-The Chainpoint CLI lets you submit hashes to a Chainpoint Node on the Tierion Network. Nodes periodically aggregate hashes and send data to Tierion Core for anchoring the hash to public blockchains.
+The Chainpoint CLI lets you submit hashes to a Chainpoint Node on the Chainpoint Network. Nodes periodically aggregate hashes and send data to Chainpoint Core for anchoring the hash to public blockchains.
 
 The CLI lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
 
@@ -84,7 +84,7 @@ You must specify a command.
 First you'll need to generate a hash of a local file or data
 of your choice. We recommended using the [SHA256](https://en.wikipedia.org/wiki/SHA-2) one-way cryptographic hash function. Other hash types will also be accepted as long as they are hex strings between 40 and 128 hex characters (`[0-9a-fA-F]`) in length.
 
-The Tierion Network only sees a hash of your data, never the
+The Chainpoint Network only sees a hash of your data, never the
 original. It is not possible for us to learn anything about your
 data from the hash.
 
