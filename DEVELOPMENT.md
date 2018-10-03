@@ -71,3 +71,37 @@ First cut a `git flow` master branch release:
 - Ensure you are a collaborator on [https://www.npmjs.com/package/chainpoint-cli](https://www.npmjs.com/package/chainpoint-cli)
 - Run `npm publish`
 - Verify the new release was pushed to [https://www.npmjs.com/package/chainpoint-cli](https://www.npmjs.com/package/chainpoint-cli).
+
+### Update Homebrew Release
+
+A formula for publishing updates to this CLI exists in the [https://github.com/chainpoint/homebrew-taps](https://github.com/chainpoint/homebrew-taps)
+repository.
+
+The formula for this binary is found at:
+[https://github.com/chainpoint/homebrew-taps/blob/master/Formula/chainpoint-cli.rb](https://github.com/chainpoint/homebrew-taps/blob/master/Formula/chainpoint-cli.rb)
+
+In the `chainpoint-cli.rb` file the following must be modified and a commit pushed to this repository:
+
+- The `url` field must contain the path (which includes the release version) to the macOS binary release hosted on Github.
+- The `version` field must be modified to point to the same version (no preceding `v`)
+- The `sha256` field must be updated with the `sha256sum` output of the downloaded file.
+
+The best way to get the `sha256` value is to download the released binary from Github (don't use your local build) and get its `sha256` value from that file.
+
+```
+wget https://github.com/chainpoint/chainpoint-cli/releases/download/v1.4.7/chainpoint-cli-macos-x64 -O /tmp/chainpoint-cli-macos-x64
+
+sha256sum /tmp/chainpoint-cli-macos-x64
+```
+
+Once you've modified, committed, and pushed the Formula run:
+
+- `brew update` : you should see the `chainpoint-cli` formula was updated
+- `brew upgrade chainpoint-cli` : It should install the new version upgrade cleanly.
+
+Now verify that the updated `chainpoint` binary works:
+
+```
+$ chainpoint version
+1.4.7
+```
