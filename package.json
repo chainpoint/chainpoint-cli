@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "yarn run build:clean && pkg . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
-    "build-debug": "yarn build:clean && ./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
+    "build:debug": "yarn build:clean && ./node_modules/.bin/pkg --debug . --targets node8-macos-x64,node8-linux-x64,node8-linux-x86,node8-alpine-x64 --out-path ./build/",
     "build:clean": "rimraf ./build/*",
     "install-npm": "npm install -g --production",
     "uninstall-npm": "npm uninstall -g chainpoint-cli",
