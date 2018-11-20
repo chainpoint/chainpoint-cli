@@ -130,7 +130,6 @@ async function startAsync() {
             description: 'process all items in local database',
             type: 'boolean'
           }).argv
-        argv.server = await parseBaseUriAsync(argv.server)
         verifyCmd.executeAsync(yargs, argv)
       })
       .command(
