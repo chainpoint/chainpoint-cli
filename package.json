@@ -18,8 +18,8 @@
     "install-bin-alpine": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-alpine-x64 /usr/local/bin/chp",
     "uninstall-bin": "rm -f /usr/local/bin/chp",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-    "lint": "eslint **/*.js",
-    "lint-fix": "eslint --fix **/*.js",
+    "lint": "eslint lib/**/*.js ./*.js",
+    "lint-fix": "eslint --fix lib/**/*.js ./*.js",
     "test": "yarn run lint",
     "mocha": "mocha tests/ --recursive -R spec"
   },
