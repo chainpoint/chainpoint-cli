@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 /* Copyright 2017 Tierion
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*     http://www.apache.org/licenses/LICENSE-2.0
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 const utils = require('./lib/utils')
 const _ = require('lodash')
@@ -37,6 +37,7 @@ async function startAsync() {
   const submitCmd = require('./lib/submit.js')
   const updateCmd = require('./lib/update.js')
   const verifyCmd = require('./lib/verify.js')
+  const btcCmd = require('./lib/btc.js')
   const evaluateCmd = require('./lib/evaluate.js')
   const exportCmd = require('./lib/export.js')
   const listCmd = require('./lib/list.js')
@@ -148,6 +149,22 @@ async function startAsync() {
           evaluateCmd.executeAsync(yargs, argv)
         }
       )
+      .command(
+        'btc',
+        'returns information about the btc anchor transactions',
+        async yargs => {
+          let argv = yargs
+            .usage('Usage: btc [options] <hash_id_node>')
+            .option('a', {
+              alias: 'all',
+              demandOption: false,
+              requiresArg: false,
+              description: 'process all items in local database',
+              type: 'boolean'
+            }).argv
+          btcCmd.executeAsync(yargs, argv)
+        }
+      )
       .command('export', 'export a proof', async yargs => {
         let argv = yargs
           .usage('Usage: export [options] <hash_id_node>')
@@ -199,6 +216,7 @@ async function startAsync() {
             'submit',
             'update',
             'verify',
+            'btc',
             'evaluate',
             'export',
             'list',
