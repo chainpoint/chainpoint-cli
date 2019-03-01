@@ -18,8 +18,8 @@
     "install-bin-alpine": "yarn build-clean && yarn build && cp ./build/chainpoint-cli-alpine-x64 /usr/local/bin/chp",
     "uninstall-bin": "rm -f /usr/local/bin/chp",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-    "lint": "eslint **/*.js",
-    "lint-fix": "eslint --fix **/*.js",
+    "lint": "eslint lib/**/*.js ./*.js",
+    "lint-fix": "eslint --fix lib/**/*.js ./*.js",
     "test": "yarn run lint",
     "mocha": "mocha tests/ --recursive -R spec"
   },
@@ -54,10 +54,11 @@
   "dependencies": {
     "async-await-parallel": "^1.0.0",
     "async-retry": "^1.2.3",
+    "bcoin": "^1.0.2",
     "blake2s-js": "^1.3.0",
     "bluebird": "^3.5.3",
     "chainpoint-binary": "^4.0.2",
-    "chainpoint-client": "^0.2.4",
+    "chainpoint-client": "^0.3.0",
     "chainpoint-proof-json-schema": "^1.0.2",
     "envalid": "^3.1.1",
     "get-stdin": "^6.0.0",

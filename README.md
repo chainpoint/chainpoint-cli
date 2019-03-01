@@ -72,9 +72,10 @@ Commands:
 
 Options:
   -s, --server  specify server to use[string] [default: "http://0.0.0.0"]
-  -q, --quiet   suppress all non-error output                          [boolean]
-  -j, --json    format all output as json                              [boolean]
-  --help        show help                                              [boolean]
+  -q, --quiet   suppress all non-error output                            [boolean]
+  -j, --json    format all output as json                                [boolean]
+  -b, --btc     display btc specific information where applicable        [boolean]
+  --help        show help                                                [boolean]
 
 You must specify a command.
 ```
@@ -202,6 +203,20 @@ chp show 52eb62c0-f556-11e7-bcf8-016fed1c55ad | jq
 
 You can see in this case I piped the output of the `show` sub-command to the `jq` program. This is just for viewing convenience so we can see the pretty-printed version of the proof.
 
+### Evaluating a proof
+
+`evaluate <hash_id>` calculates and displays the expected values for each anchor in the proof.
+Adding `--btc` or `-b` will return the previous outpoint hash for the first input of the evaluated bitcoin proofs.
+This can be useful for evaluating proofs with light clients.
+
+```
+chp evaluate b640f9f0-3661-11e9-9c57-018b108544a2
+
+b640f9f0-3661-11e9-9c57-018b108544a2 | cal | 2755298 | ab1dc08a1950ade9d4d603c90d655307eb765905148f6e18eddeb64ca241b7b4
+b640f9f0-3661-11e9-9c57-018b108544a2 | btc | 564116 | af81bc00748ed3beab4f08ad16b33bb88aefdc0a283eb4446cf8d83b38ea7133 | 1 | 6a630dbd22cf54f2da91396e48f025cf1f154ffa8eb7d9642b969da39921d6ea
+
+```
+
 ### Other commands
 
 `list` will show you a list of all hash IDs and hashes that have been submitted from this CLI client.
@@ -209,8 +224,6 @@ You can see in this case I piped the output of the `show` sub-command to the `jq
 `export` allows you to export a proof in either JSON or binary file formats.
 
 `delete <hash_id>` allows you to manually delete any hash from your local DB.
-
-`evaluate <hash_id>` calculates and displays the expected values for each anchor in the proof.
 
 You can also get JSON output by passing in the `--json` flag. For example:
 
