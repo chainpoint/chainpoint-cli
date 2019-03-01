@@ -37,7 +37,6 @@ async function startAsync() {
   const submitCmd = require('./lib/submit.js')
   const updateCmd = require('./lib/update.js')
   const verifyCmd = require('./lib/verify.js')
-  const btcCmd = require('./lib/btc.js')
   const evaluateCmd = require('./lib/evaluate.js')
   const exportCmd = require('./lib/export.js')
   const listCmd = require('./lib/list.js')
@@ -145,24 +144,15 @@ async function startAsync() {
               requiresArg: false,
               description: 'process all items in local database',
               type: 'boolean'
-            }).argv
-          evaluateCmd.executeAsync(yargs, argv)
-        }
-      )
-      .command(
-        'btc',
-        'returns information about the btc anchor transactions',
-        async yargs => {
-          let argv = yargs
-            .usage('Usage: btc [options] <hash_id_node>')
-            .option('a', {
-              alias: 'all',
+            })
+            .option('b', {
+              alias: 'btc',
               demandOption: false,
               requiresArg: false,
-              description: 'process all items in local database',
+              description: 'get relevant bitcoin anchor tx information',
               type: 'boolean'
             }).argv
-          btcCmd.executeAsync(yargs, argv)
+          evaluateCmd.executeAsync(yargs, argv)
         }
       )
       .command('export', 'export a proof', async yargs => {
@@ -216,7 +206,6 @@ async function startAsync() {
             'submit',
             'update',
             'verify',
-            'btc',
             'evaluate',
             'export',
             'list',
