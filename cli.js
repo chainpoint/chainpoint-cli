@@ -129,6 +129,13 @@ async function startAsync() {
             requiresArg: false,
             description: 'process all items in local database',
             type: 'boolean'
+          })
+          .option('v', {
+            alias: 'spv',
+            demandOption: false,
+            requiresArg: false,
+            description: 'verify against a bitcoin spv node',
+            type: 'boolean'
           }).argv
         verifyCmd.executeAsync(yargs, argv)
       })
