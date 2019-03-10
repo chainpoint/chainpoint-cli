@@ -130,8 +130,8 @@ async function startAsync() {
             description: 'process all items in local database',
             type: 'boolean'
           })
-          .option('v', {
-            alias: 'spv',
+          .option('b', {
+            alias: 'btc',
             demandOption: false,
             requiresArg: false,
             description: 'verify against a bitcoin spv node',

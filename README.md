@@ -74,7 +74,7 @@ Options:
   -s, --server  specify server to use[string] [default: "http://0.0.0.0"]
   -q, --quiet   suppress all non-error output                            [boolean]
   -j, --json    format all output as json                                [boolean]
-  -b, --btc     display btc specific information where applicable        [boolean]
+  -b, --btc     run btc specific operations where applicable             [boolean]
   --help        show help                                                [boolean]
 
 You must specify a command.
@@ -136,6 +136,19 @@ chp verify 52eb62c0-f556-11e7-bcf8-016fed1c55ad
 ```
 
 You can see here that the proof represented by the `node_hash_id` provided is anchored to the Calendar (`cal`) level.
+
+#### SPV Verification
+
+If you have a bitcoin node running that you would like to verify proofs against, pass the `--btc`
+or `-b` flag. Since only the block headers are required to verify a proof, an spv node should be
+sufficient to verify. Only the [bcoin](https://bcoin.io) API is currently supported, though this
+could be expanded in the future.
+
+To make your target node's information available to the verification client, add a `bcoin.conf`
+file in your `~/.chainpoint` directory with all relevant information (`host`, `port`, `api-key`, etc)
+See [here](http://bcoin.io/api-docs/index.html#configuring-clients) for more information.
+Environment variables (prefaced with `BCOIN_`) and command line args (prefaced with `--bcoin-`)
+are also supported configuration options.
 
 ### Viewing a Proof
 
