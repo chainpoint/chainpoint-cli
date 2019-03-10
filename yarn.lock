@@ -269,7 +269,7 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-bcfg@^0.1.5, bcfg@~0.1.0, bcfg@~0.1.5:
+bcfg@~0.1.0, bcfg@~0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/bcfg/-/bcfg-0.1.5.tgz#cebc9aec935d01726037a5fcf903d138341ca7bb"
   integrity sha512-a3dJQnXbBAl9wrhcki+H21mTtMKUJfdTuOcnGhDGSUQqpiBD5+uYfEvBz3vDFvBsuRguxV6Jp8kZQGwrMLQHPQ==
