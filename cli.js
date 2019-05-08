@@ -183,6 +183,45 @@ async function startAsync() {
         let argv = yargs.usage('Usage: delete <hash_id_node>').argv
         deleteCmd.executeAsync(yargs, argv)
       })
+      .command(
+        'bhn',
+        'interact with a header node, either one running locally or remotely',
+        yargs =>
+          yargs
+            .commandDir('lib/bhn')
+            .usage('Usage: bhn <command> [options...]')
+            .option('uri', {
+              describe:
+                'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)',
+              default: 'http://localhost:8332'
+            })
+            .option('api-key', {
+              describe: 'api key if target node requires authentication'
+            })
+            .option('host', {
+              describe: 'host of target bitcoin header node',
+              default: 'localhost'
+            })
+            .option('port', {
+              describe:
+                'port of target bitcoin header node if different from default bitcoin RPC port',
+              default: '8332 (for mainnet)'
+            })
+            .option('network', {
+              describe:
+                'Bitcoin network the target node is running on. This option is useful if want to target default ports.',
+              default: 'main'
+            })
+            .option('protocol', {
+              describe: 'protocol where target bitcoin header node is running',
+              default: 'http:'
+            })
+            .demandCommand(
+              1,
+              'Must pass a command to run with bhn, e.g. chp bhn start'
+            )
+            .help()
+      )
       .command('version', 'show the CLI version', yargs => {
         let argv = yargs.usage('Usage: version').argv
         versionCmd.executeAsync(yargs, argv)
@@ -211,6 +250,7 @@ async function startAsync() {
             'list',
             'show',
             'delete',
+            'bhn',
             'version'
           ],
           command
