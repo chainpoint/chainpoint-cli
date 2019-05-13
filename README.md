@@ -206,14 +206,13 @@ You can see in this case I piped the output of the `show` sub-command to the `jq
 ### Evaluating a proof
 
 `evaluate <hash_id>` calculates and displays the expected values for each anchor in the proof.
-Adding `--btc` or `-b` will return the previous outpoint hash for the first input of the evaluated bitcoin proofs.
-This can be useful for evaluating proofs with light clients.
+Adding `--btc` or `-b` will return the txid of the anchor transaction.
 
 ```
 chp evaluate b640f9f0-3661-11e9-9c57-018b108544a2
 
 b640f9f0-3661-11e9-9c57-018b108544a2 | cal | 2755298 | ab1dc08a1950ade9d4d603c90d655307eb765905148f6e18eddeb64ca241b7b4
-b640f9f0-3661-11e9-9c57-018b108544a2 | btc | 564116 | af81bc00748ed3beab4f08ad16b33bb88aefdc0a283eb4446cf8d83b38ea7133 | 1 | 6a630dbd22cf54f2da91396e48f025cf1f154ffa8eb7d9642b969da39921d6ea
+b640f9f0-3661-11e9-9c57-018b108544a2 | btc | 564116 | af81bc00748ed3beab4f08ad16b33bb88aefdc0a283eb4446cf8d83b38ea7133 | 7cdcefb56c2ec3230b2edb2ff5d1adf4a8acf4525850e1f0248b803cfe96dd02
 
 ```
 
