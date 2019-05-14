@@ -418,7 +418,7 @@ bevent@~0.1.0, bevent@~0.1.4:
   dependencies:
     bsert "~0.0.10"
 
-bfile@^0.2.0:
+bfile@^0.2.0, bfile@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/bfile/-/bfile-0.2.1.tgz#2d19ac27f355fef861d5d1a4cd0e4a7f27bb4151"
   integrity sha512-du2QjKNkqZ1YJweWEQeq3CEqd+nQD/WOnmAMfs52ok5ujBBagWYLZC5ORDuqfV2fuF88of44PZdsnAVfxoH31g==

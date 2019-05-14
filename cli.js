@@ -23,11 +23,11 @@ async function parseBaseUriAsync(baseUri) {
     console.error(`Invalid server - ${baseUri}`)
     process.exit(1)
   }
-  // if no value was specified in --server or in chainpoint-cli.config, let the chainpint-client select node(s)
+  // if no value was specified in --server or in cli.config, let the chainpint-client select node(s)
   // http://0.0.0.0 is the env default, and represents a null setting
   if (baseUri === 'http://0.0.0.0') return null
 
-  // otherwise, return the valid value supplied with --server or in chainpoint-cli.config as a one element array
+  // otherwise, return the valid value supplied with --server or in cli.config as a one element array
   return baseUri
 }
 
@@ -91,90 +91,64 @@ async function startAsync() {
         description: 'format all output as json',
         type: 'boolean'
       })
-      .command(
-        'submit',
-        'submit a hash to be anchored (3x Nodes default)',
-        async yargs => {
-          let argv = yargs
-            .usage(
-              'Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )'
-            )
-            .string('_').argv
-          argv.server = await parseBaseUriAsync(argv.server)
-          submitCmd.executeAsync(yargs, argv)
-        }
-      )
-      .command(
-        'update',
-        'retrieve an updated proof for your hash(es), if available',
-        async yargs => {
-          let argv = yargs
-            .usage('Usage: update [options] <hash_id_node>')
-            .option('a', {
-              alias: 'all',
-              demandOption: false,
-              requiresArg: false,
-              description: 'process all items in local database',
-              type: 'boolean'
-            }).argv
-          updateCmd.executeAsync(yargs, argv)
-        }
-      )
+      .command('submit', 'submit a hash to be anchored (3x Nodes default)', async yargs => {
+        let argv = yargs.usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )').string('_').argv
+        argv.server = await parseBaseUriAsync(argv.server)
+        submitCmd.executeAsync(yargs, argv)
+      })
+      .command('update', 'retrieve an updated proof for your hash(es), if available', async yargs => {
+        let argv = yargs.usage('Usage: update [options] <hash_id_node>').option('a', {
+          alias: 'all',
+          demandOption: false,
+          requiresArg: false,
+          description: 'process all items in local database',
+          type: 'boolean'
+        }).argv
+        updateCmd.executeAsync(yargs, argv)
+      })
       .command('verify', "verify a proof's anchor claims", async yargs => {
+        let argv = yargs.usage('Usage: verify [options] <hash_id_node>').option('a', {
+          alias: 'all',
+          demandOption: false,
+          requiresArg: false,
+          description: 'process all items in local database',
+          type: 'boolean'
+        }).argv
+        verifyCmd.executeAsync(yargs, argv)
+      })
+      .command('evaluate', "evaluate and display a proof's anchor claims", async yargs => {
         let argv = yargs
-          .usage('Usage: verify [options] <hash_id_node>')
+          .usage('Usage: evaluate [options] <hash_id_node>')
           .option('a', {
             alias: 'all',
             demandOption: false,
             requiresArg: false,
             description: 'process all items in local database',
             type: 'boolean'
-          }).argv
-        verifyCmd.executeAsync(yargs, argv)
-      })
-      .command(
-        'evaluate',
-        "evaluate and display a proof's anchor claims",
-        async yargs => {
-          let argv = yargs
-            .usage('Usage: evaluate [options] <hash_id_node>')
-            .option('a', {
-              alias: 'all',
-              demandOption: false,
-              requiresArg: false,
-              description: 'process all items in local database',
-              type: 'boolean'
-            })
-            .option('b', {
-              alias: 'btc',
-              demandOption: false,
-              requiresArg: false,
-              description: 'get relevant bitcoin anchor tx information',
-              type: 'boolean'
-            }).argv
-          evaluateCmd.executeAsync(yargs, argv)
-        }
-      )
-      .command('export', 'export a proof', async yargs => {
-        let argv = yargs
-          .usage('Usage: export [options] <hash_id_node>')
+          })
           .option('b', {
-            alias: 'binary',
+            alias: 'btc',
             demandOption: false,
             requiresArg: false,
-            description: 'use binary format',
+            description: 'get relevant bitcoin anchor tx information',
             type: 'boolean'
           }).argv
+        evaluateCmd.executeAsync(yargs, argv)
+      })
+      .command('export', 'export a proof', async yargs => {
+        let argv = yargs.usage('Usage: export [options] <hash_id_node>').option('b', {
+          alias: 'binary',
+          demandOption: false,
+          requiresArg: false,
+          description: 'use binary format',
+          type: 'boolean'
+        }).argv
         exportCmd.executeAsync(yargs, argv)
       })
-      .command(
-        'list',
-        'display the status of every hash in the local database',
-        yargs => {
-          let argv = yargs.usage('Usage: list').argv
-          listCmd.executeAsync(yargs, argv)
-        }
-      )
+      .command('list', 'display the status of every hash in the local database', yargs => {
+        let argv = yargs.usage('Usage: list').argv
+        listCmd.executeAsync(yargs, argv)
+      })
       .command('show', 'show the proof for a hash_id_node', yargs => {
         let argv = yargs.usage('Usage: show [hash_id_node]').argv
         showCmd.executeAsync(yargs, argv)
@@ -183,44 +157,37 @@ async function startAsync() {
         let argv = yargs.usage('Usage: delete <hash_id_node>').argv
         deleteCmd.executeAsync(yargs, argv)
       })
-      .command(
-        'bhn',
-        'interact with a header node, either one running locally or remotely',
-        yargs =>
-          yargs
-            .commandDir('lib/bhn')
-            .usage('Usage: bhn <command> [options...]')
-            .option('uri', {
-              describe:
-                'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)',
-              default: 'http://localhost:8332'
-            })
-            .option('api-key', {
-              describe: 'api key if target node requires authentication'
-            })
-            .option('host', {
-              describe: 'host of target bitcoin header node',
-              default: 'localhost'
-            })
-            .option('port', {
-              describe:
-                'port of target bitcoin header node if different from default bitcoin RPC port',
-              default: '8332 (for mainnet)'
-            })
-            .option('network', {
-              describe:
-                'Bitcoin network the target node is running on. This option is useful if want to target default ports.',
-              default: 'main'
-            })
-            .option('protocol', {
-              describe: 'protocol where target bitcoin header node is running',
-              default: 'http:'
-            })
-            .demandCommand(
-              1,
-              'Must pass a command to run with bhn, e.g. chp bhn start'
-            )
-            .help()
+      .command('bhn', 'interact with a header node, either one running locally or remotely', yargs =>
+        yargs
+          .commandDir('lib/bhn')
+          .usage('Usage: bhn <command> [options...]')
+          .option('uri', {
+            describe:
+              'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)',
+            default: 'http://localhost:8332'
+          })
+          .option('api-key', {
+            describe: 'api key if target node requires authentication'
+          })
+          .option('host', {
+            describe: 'host of target bitcoin header node',
+            default: 'localhost'
+          })
+          .option('port', {
+            describe: 'port of target bitcoin header node if different from default bitcoin RPC port',
+            default: '8332 (for mainnet)'
+          })
+          .option('network', {
+            describe:
+              'Bitcoin network the target node is running on. This option is useful if want to target default ports.',
+            default: 'main'
+          })
+          .option('protocol', {
+            describe: 'protocol where target bitcoin header node is running',
+            default: 'http:'
+          })
+          .demandCommand(1, 'Must pass a command to run with bhn, e.g. chp bhn start')
+          .help()
       )
       .command('version', 'show the CLI version', yargs => {
         let argv = yargs.usage('Usage: version').argv
@@ -241,18 +208,7 @@ async function startAsync() {
       let command = _.lowerCase(argv._[0])
       if (
         _.indexOf(
-          [
-            'submit',
-            'update',
-            'verify',
-            'evaluate',
-            'export',
-            'list',
-            'show',
-            'delete',
-            'bhn',
-            'version'
-          ],
+          ['submit', 'update', 'verify', 'evaluate', 'export', 'list', 'show', 'delete', 'bhn', 'version'],
           command
         ) < 0
       ) {

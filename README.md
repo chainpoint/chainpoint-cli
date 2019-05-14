@@ -46,12 +46,12 @@ Usage: chp <command> [options] <argument>
 You can get an overview of the CLI usage by typing the command (`chp`). The Node that the CLI will
 communicate with will be chosen from those advertised as healthy on the network.
 
-On first use, the CLI will create a `~/.chainpoint` directory
+On first use, the CLI will create a `~/.chainpoint/cli` directory
 where it will store its `chainpoint-proofs.db`
 file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
 you submit, which Node it was submitted to, and a copy of the
-proofs. You can create a `chainpoint-cli.config` file in this directory
+proofs. You can create a `cli.config` file in this directory
 with a `CHAINPOINT_NODE_API_BASE_URI=` value if you'd like to
 permanently specify a Node of your own choosing.
 
