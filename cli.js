@@ -163,8 +163,7 @@ async function startAsync() {
           .usage('Usage: bhn <command> [options...]')
           .option('uri', {
             describe:
-              'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)',
-            default: 'http://localhost:8332'
+              'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)'
           })
           .option('api-key', {
             describe: 'api key if target node requires authentication'
@@ -174,8 +173,7 @@ async function startAsync() {
             default: 'localhost'
           })
           .option('port', {
-            describe: 'port of target bitcoin header node if different from default bitcoin RPC port',
-            default: '8332 (for mainnet)'
+            describe: 'port of target bitcoin header node if different from default bitcoin RPC port'
           })
           .option('network', {
             describe:
