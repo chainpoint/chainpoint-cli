@@ -59,7 +59,7 @@
     "bluebird": "^3.5.3",
     "chainpoint-binary": "^4.0.2",
     "chainpoint-client": "^0.3.0",
-    "chainpoint-proof-json-schema": "^1.0.2",
+    "chainpoint-proof-json-schema": "^1.1.0",
     "envalid": "^3.1.1",
     "get-stdin": "^6.0.0",
     "jmespath": "^0.15.0",
