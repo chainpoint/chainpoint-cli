@@ -672,15 +672,6 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
 
-chainpoint-binary@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-4.0.2.tgz#dd55f18e856552e86650bba95da6c888ee0b835d"
-  integrity sha512-WzZBbzV5yX3i2Dq6+JI6tG5UJ0vM+4dcUhiXcif7kFjz0tbYN2rKLzrLgsk9l2+bw+/rvuZfLVSVDMZzMtfTcQ==
-  dependencies:
-    chainpoint-proof-json-schema "^1.0.2"
-    msgpack-lite "^0.1.26"
-    pako "^1.0.5"
-
 chainpoint-binary@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-4.1.0.tgz#0b923d6ba9828324947a2a07c11a0b8991b9d327"
@@ -690,35 +681,28 @@ chainpoint-binary@^4.1.0:
     msgpack-lite "^0.1.26"
     pako "^1.0.10"
 
-chainpoint-client@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.3.0.tgz#28566fa24f87db302028bc86bc9aa0490cb11047"
-  integrity sha512-O+mUpV+IeHf769eUnFGTMlOCUtKbpdRpNZCiXd8lCvktA8MmHt9+jqcJQMjrQq0nK4pwmPgrIGetXwjt3sHZNA==
+chainpoint-client@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.4.0.tgz#aa784268bee54c42fdb3e2ed492234630b56507d"
+  integrity sha512-Ij3s7queZuuYM+O1QTOZz7MkOW6GL+Iga6MPY6MtAMwfIFQmoEMwuiDQNhUn9pS6oQWXPWVALUa9i11sntvvdg==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@ungap/url-search-params" "^0.1.2"
-    chainpoint-parse "^3.2.0"
+    chainpoint-parse "^3.3.0"
     lodash "^4.17.11"
     node-fetch "^2.3.0"
     uuid "^3.3.2"
     uuid-validate "^0.0.2"
     validator "^9.1.2"
 
-chainpoint-parse@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-3.2.0.tgz#04527bef594545aa30611784e5240c3430ad66bb"
-  integrity sha512-6GpwzUnS9q7T5DgcSyhncnRUIixN58hpqnHgWO4Fsphc88bkgvmCMsGh4ZnA+OE8E8wMpmH3Q3de57SbqVPu3w==
+chainpoint-parse@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-3.3.0.tgz#c45cccad678bf6d4d6b89a90218cec11ec5b1316"
+  integrity sha512-QKI20U3H4ZHJgJI22xvfpTGiRRQwXKjdrt1ewCHwN5YD7scVDDiIEmOUjbN4nXjq44lBR8jZk37q0mtXC8lFdQ==
   dependencies:
-    chainpoint-binary "^4.0.2"
-    chainpoint-proof-json-schema "^1.0.2"
-    js-sha3 "^0.5.7"
-
-chainpoint-proof-json-schema@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-1.0.2.tgz#4d066b60f0387f07e093e6ac3ac5df2817f9e197"
-  integrity sha512-WTYvsEClYHQITjzbwhfjZo/xFF3GULQG3tI0q8RlMKhebH2mWdJE2BEBsz8DnYHJcBbxLaQEzbYAETxenqEdrQ==
-  dependencies:
-    is-my-json-valid "^2.16.0"
+    chainpoint-binary "^4.1.0"
+    chainpoint-proof-json-schema "^1.1.0"
+    js-sha3 "^0.8.0"
 
 chainpoint-proof-json-schema@^1.1.0:
   version "1.1.0"
@@ -2021,15 +2005,6 @@ is-my-ip-valid@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-my-ip-valid/-/is-my-ip-valid-1.0.0.tgz#7b351b8e8edd4d3995d4d066680e664d94696824"
   integrity sha512-gmh/eWXROncUzRnIa1Ubrt5b8ep/MGSnfAUI3aRp+sqTCs1tv1Isl8d8F6JmkN3dXKc3ehZMrtiPN9eL03NuaQ==
 
-is-my-json-valid@^2.16.0:
-  version "2.16.0"
-  resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.16.0.tgz#f079dd9bfdae65ee2038aae8acbc86ab109e3693"
-  dependencies:
-    generate-function "^2.0.0"
-    generate-object-property "^1.1.0"
-    jsonpointer "^4.0.0"
-    xtend "^4.0.0"
-
 is-my-json-valid@^2.20.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.20.0.tgz#1345a6fca3e8daefc10d0fa77067f54cedafd59a"
@@ -2150,9 +2125,10 @@ jmespath@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
 
-js-sha3@^0.5.7:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.5.7.tgz#0d4ffd8002d5333aabaf4a23eed2f6374c9f28e7"
+js-sha3@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"
+  integrity sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -2821,10 +2797,6 @@ pako@^1.0.10:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
-
-pako@^1.0.5:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.6.tgz#0101211baa70c4bca4a0f63f2206e97b7dfaf258"
 
 parse-json@^2.2.0:
   version "2.2.0"
