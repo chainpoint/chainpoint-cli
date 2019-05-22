@@ -681,6 +681,15 @@ chainpoint-binary@^4.0.2:
     msgpack-lite "^0.1.26"
     pako "^1.0.5"
 
+chainpoint-binary@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-4.1.0.tgz#0b923d6ba9828324947a2a07c11a0b8991b9d327"
+  integrity sha512-KsO9pyx/+TII8IKcG2QuE71u64hF6WoAEIDxYBj6RLfGeuLmIx9y5d7SgeJUXBP+XQLW/tfw6Kteo6aVYk0Lkg==
+  dependencies:
+    chainpoint-proof-json-schema "^1.1.0"
+    msgpack-lite "^0.1.26"
+    pako "^1.0.10"
+
 chainpoint-client@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.3.0.tgz#28566fa24f87db302028bc86bc9aa0490cb11047"
@@ -2807,6 +2816,11 @@ p-map@^2.0.0:
 p-try@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.0.0.tgz#85080bb87c64688fa47996fe8f7dfbe8211760b1"
+
+pako@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
+  integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
 
 pako@^1.0.5:
   version "1.0.6"

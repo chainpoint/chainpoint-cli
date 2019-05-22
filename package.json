@@ -57,7 +57,7 @@
     "bcoin": "^1.0.2",
     "blake2s-js": "^1.3.0",
     "bluebird": "^3.5.3",
-    "chainpoint-binary": "^4.0.2",
+    "chainpoint-binary": "^4.1.0",
     "chainpoint-client": "^0.3.0",
     "chainpoint-proof-json-schema": "^1.1.0",
     "envalid": "^3.1.1",
