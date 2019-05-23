@@ -681,24 +681,24 @@ chainpoint-binary@^4.1.0:
     msgpack-lite "^0.1.26"
     pako "^1.0.10"
 
-chainpoint-client@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.4.0.tgz#aa784268bee54c42fdb3e2ed492234630b56507d"
-  integrity sha512-Ij3s7queZuuYM+O1QTOZz7MkOW6GL+Iga6MPY6MtAMwfIFQmoEMwuiDQNhUn9pS6oQWXPWVALUa9i11sntvvdg==
+chainpoint-client@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.4.1.tgz#9b8aeb6072d1a454a65fa8d38d704c93be5203c0"
+  integrity sha512-qyZhW8gA1DjF40i0rc03y+A0lBEQS8MuXTVlLfhsm/rIFhjkoxdAeYq0VyCuVJXqh4dFgrJgqE1unFkNt/rQcw==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@ungap/url-search-params" "^0.1.2"
-    chainpoint-parse "^3.3.0"
+    chainpoint-parse "^3.3.1"
     lodash "^4.17.11"
     node-fetch "^2.3.0"
     uuid "^3.3.2"
     uuid-validate "^0.0.2"
     validator "^9.1.2"
 
-chainpoint-parse@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-3.3.0.tgz#c45cccad678bf6d4d6b89a90218cec11ec5b1316"
-  integrity sha512-QKI20U3H4ZHJgJI22xvfpTGiRRQwXKjdrt1ewCHwN5YD7scVDDiIEmOUjbN4nXjq44lBR8jZk37q0mtXC8lFdQ==
+chainpoint-parse@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-3.3.1.tgz#737d2a9610b77debdc58df594e768ac43680acf5"
+  integrity sha512-rGkKEOnqr5sAo/I5ofjgZyec9bKp4Zp99OPcA55gauGFpbYVKrJ6X3HxSTqkhFxchb6wlG3MBjGys3JsqwZd8g==
   dependencies:
     chainpoint-binary "^4.1.0"
     chainpoint-proof-json-schema "^1.1.0"
