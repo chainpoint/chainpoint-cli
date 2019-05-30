@@ -16,9 +16,7 @@ const semver = require('semver')
 const currentVersion = process.version
 let runningValidVersion = semver.gt(currentVersion, '7.6.0')
 if (!runningValidVersion) {
-  console.error(
-    `Chainpoint CLI requires Node v7.6.0 or higher, ${currentVersion} is currently in use`
-  )
+  console.error(`Chainpoint CLI requires Node v7.6.0 or higher, ${currentVersion} is currently in use`)
   process.exit(1)
 }
 
