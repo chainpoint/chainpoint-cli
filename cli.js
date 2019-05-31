@@ -160,26 +160,26 @@ async function startAsync() {
         yargs
           .commandDir('lib/bhn')
           .usage('Usage: bhn <command> [options...]')
-          .option('uri', {
+          .option('bhn-uri', {
             describe:
               'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)'
           })
-          .option('api-key', {
+          .option('bhn-api-key', {
             describe: 'api key if target node requires authentication'
           })
-          .option('host', {
+          .option('bhn-host', {
             describe: 'host of target bitcoin header node',
             default: 'localhost'
           })
-          .option('port', {
+          .option('bhn-port', {
             describe: 'port of target bitcoin header node if different from default bitcoin RPC port'
           })
-          .option('network', {
+          .option('bhn-network', {
             describe:
               'Bitcoin network the target node is running on. This option is useful if want to target default ports.',
             default: 'main'
           })
-          .option('protocol', {
+          .option('bhn-protocol', {
             describe: 'protocol where target bitcoin header node is running',
             default: 'http:'
           })
