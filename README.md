@@ -16,6 +16,12 @@ The CLI also maintains a simple local database that keeps track of
 every hash you submit, and stores and manages Chainpoint proofs
 locally for easy retrieval, export, and verification.
 
+## Backwards Incompatible Changes for V2
+
+- cli arg for passing a custom node server was changed from `--server` and `-s` to `--node-uri` and `-n`.
+  Use `chp --help` for more info
+- To pass connection configs for a bitcoin header node (bhn), preface with a `--bhn-`, e.g. `--bhn-uri`, `--bhn-port`, or `--bhn-api-key`
+
 ## Installation
 
 ### Easy Install
@@ -71,11 +77,11 @@ Commands:
   version   show the CLI version
 
 Options:
-  -s, --server  specify server to use[string] [default: "http://0.0.0.0"]
-  -q, --quiet   suppress all non-error output                            [boolean]
-  -j, --json    format all output as json                                [boolean]
-  -b, --btc     display btc specific information where applicable        [boolean]
-  --help        show help                                                [boolean]
+  -n, --node-uri  specify uri of chainpoint node [string] [default: "http://0.0.0.0"]
+  -q, --quiet   suppress all non-error output                               [boolean]
+  -j, --json    format all output as json                                   [boolean]
+  -b, --btc     display btc specific information where applicable           [boolean]
+  --help        show help                                                   [boolean]
 
 You must specify a command.
 ```
@@ -239,8 +245,8 @@ $ chp submit --help
 Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )
 
 Options:
-  -s, --server  specify server to use
-                                  [string] [default: "http://SERVER"]
+  -n, --node-uri  specify uri of chainpoint node
+                                  [string] [default: "http://NODE_URI"]
   -q, --quiet   suppress all non-error output                          [boolean]
   -j, --json    format all output as json                              [boolean]
   --help        show help                                              [boolean]

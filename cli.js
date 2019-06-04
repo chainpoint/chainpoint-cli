@@ -18,16 +18,16 @@ const getStdin = require('get-stdin')
 const yargs = require('yargs')
 
 async function parseBaseUriAsync(baseUri) {
-  // if the value supplied in --server or in chainpoint-cli.config is invalid, exit
+  // if the value supplied in --node-uri or in chainpoint-cli.config is invalid, exit
   if (!utils.isValidUrl(baseUri)) {
-    console.error(`Invalid server - ${baseUri}`)
+    console.error(`Invalid node uri - ${baseUri}`)
     process.exit(1)
   }
-  // if no value was specified in --server or in cli.config, let the chainpint-client select node(s)
+  // if no value was specified in --node-uri or in cli.config, let the chainpint-client select node(s)
   // http://0.0.0.0 is the env default, and represents a null setting
   if (baseUri === 'http://0.0.0.0') return null
 
-  // otherwise, return the valid value supplied with --server or in cli.config as a one element array
+  // otherwise, return the valid value supplied with --node-uri or in cli.config as a one element array
   return baseUri
 }
 
@@ -60,7 +60,6 @@ async function startAsync() {
       yargs.showHelp()
       console.error(`Error reading from stdin: ${input}`)
     }
-
     let argv = yargs
       .usage(
         'Usage: ' +
@@ -70,11 +69,11 @@ async function startAsync() {
             .slice(0, -3) +
           ' <command> [options] <argument>'
       )
-      .option('s', {
-        alias: 'server',
+      .option('n', {
+        alias: 'node-uri',
         requiresArg: true,
         default: env.CHAINPOINT_NODE_API_BASE_URI,
-        description: 'specify server to use',
+        description: 'specify uri of chainpoint node',
         type: 'string'
       })
       .option('q', {
@@ -93,7 +92,7 @@ async function startAsync() {
       })
       .command('submit', 'submit a hash to be anchored (3x Nodes default)', async yargs => {
         let argv = yargs.usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )').string('_').argv
-        argv.server = await parseBaseUriAsync(argv.server)
+        argv.nodeUri = await parseBaseUriAsync(argv.nodeUri)
         submitCmd.executeAsync(yargs, argv)
       })
       .command('update', 'retrieve an updated proof for your hash(es), if available', async yargs => {
@@ -161,26 +160,26 @@ async function startAsync() {
         yargs
           .commandDir('lib/bhn')
           .usage('Usage: bhn <command> [options...]')
-          .option('uri', {
+          .option('bhn-uri', {
             describe:
               'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)'
           })
-          .option('api-key', {
+          .option('bhn-api-key', {
             describe: 'api key if target node requires authentication'
           })
-          .option('host', {
+          .option('bhn-host', {
             describe: 'host of target bitcoin header node',
             default: 'localhost'
           })
-          .option('port', {
+          .option('bhn-port', {
             describe: 'port of target bitcoin header node if different from default bitcoin RPC port'
           })
-          .option('network', {
+          .option('bhn-network', {
             describe:
               'Bitcoin network the target node is running on. This option is useful if want to target default ports.',
             default: 'main'
           })
-          .option('protocol', {
+          .option('bhn-protocol', {
             describe: 'protocol where target bitcoin header node is running',
             default: 'http:'
           })
