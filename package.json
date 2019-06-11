@@ -62,7 +62,7 @@
     "bluebird": "^3.5.3",
     "bsert": "^0.0.10",
     "chainpoint-binary": "^4.1.0",
-    "chainpoint-client": "^0.4.1",
+    "chainpoint-client": "chainpoint/chainpoint-client-js#core-v2-support",
     "chainpoint-proof-json-schema": "^1.1.0",
     "chalk": "^2.4.2",
     "envalid": "^3.1.1",
