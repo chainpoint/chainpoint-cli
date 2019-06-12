@@ -176,7 +176,7 @@ async function startAsync() {
           })
           .option('bhn-network', {
             describe:
-              'Bitcoin network the target node is running on. This option is useful if want to target default ports.',
+              'Bitcoin network the target node is running on. This option is useful if want to target default ports. (--network also works)',
             default: 'main'
           })
           .option('bhn-protocol', {
