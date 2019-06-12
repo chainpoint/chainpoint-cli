@@ -67,7 +67,7 @@
     "chalk": "^2.4.2",
     "envalid": "^3.1.1",
     "get-stdin": "^6.0.0",
-    "headernode": "git+ssh://git@github.com:chainpoint/headernode.git",
+    "bhn": "git+ssh://git@github.com:chainpoint/bitcoin-header-node.git",
     "jmespath": "^0.15.0",
     "lodash": "^4.17.11",
     "nedb": "^1.8.0",
