@@ -16,11 +16,16 @@ The CLI also maintains a simple local database that keeps track of
 every hash you submit, and stores and manages Chainpoint proofs
 locally for easy retrieval, export, and verification.
 
+The CLI includes an interface for interacting with a [Bitcoin Header Node](https://github.com/chainpoint/bitcoin-header-node)
+which can be used for verifying btc anchors locally rather than relying on an external service.
+
 ## Backwards Incompatible Changes for V2
 
 - cli arg for passing a custom node server was changed from `--server` and `-s` to `--node-uri` and `-n`.
   Use `chp --help` for more info
 - To pass connection configs for a bitcoin header node (bhn), preface with a `--bhn-`, e.g. `--bhn-uri`, `--bhn-port`, or `--bhn-api-key`
+- Submissions and verifications now happen on the new Chainpoint network. If you would like to use the CLI
+  for verifying older proofs, please downgrade to v1.x.x of the CLI
 
 ## Installation
 
@@ -235,6 +240,112 @@ You can also get JSON output by passing in the `--json` flag. For example:
 ```
 chp verify --json 52eb62c0-f556-11e7-bcf8-016fed1c55ad
 ```
+
+### Interacting with a Bitcoin Header Node (BHN)
+
+Following the `chp` command with `bhn` will pass along any commands and options to the Bitcoin Header Node Interface.
+All data associated the instance of bhn is stored by default in the `/.chainpoint/bhn` data directory. As with the
+primary `chp` command, you can see a list of `bhn` options by simply typing `chp bhn`
+
+```
+$ chp bhn
+
+Usage: bhn <command> [options...]
+
+Commands:
+  chp bhn execute <method>          fire an arbitrary rpc method to
+  [options..]                          the bitcoin header node. e.g.
+                                       `chp bhn execute getpeerinfo`
+  chp bhn get <block-height>        get the header for a block at a
+  [header node options...]             certai block. Must point to a
+                                       running bhn server
+  chp bhn info [header node         get info about a bitcoin header
+  options...]                          node. With no options set it
+                                       will check locally and indicate
+                                       if none is running
+  chp bhn start [header node        start a bitcoin header node
+  options...]                          locally
+  chp bhn stop [header node         stop a bitcoin header node
+  options...]
+
+Options:
+  --version       Show version number                         [boolean]
+  -n, --node-uri  specify uri of chainpoint node
+                                   [string] [default: "http://0.0.0.0"]
+  -q, --quiet     suppress all non-error output               [boolean]
+  -j, --json      format all output as json                   [boolean]
+  --bhn-uri       full uri of bitcoin header node. If no port is given,
+                  assumed default RPC port for Bitcoin Mainnet (8332)
+  --bhn-api-key   api key if target node requires authentication
+  --bhn-host      host of target bitcoin header node
+                                                 [default: "localhost"]
+  --bhn-port      port of target bitcoin header node if different from
+                  default bitcoin RPC port
+  --bhn-network   Bitcoin network the target node is running on. This
+                  option is useful if want to target default ports.
+                  (--network also works)              [default: "main"]
+  --bhn-protocol  protocol where target bitcoin header node is running
+                                                     [default: "http:"]
+  --help          Show help                                   [boolean]
+
+```
+
+### Starting BHN
+
+Before you can verify btc anchors locally, you need to sync up a bhn node.
+By default a mainnet node will be started with no api key, and at the Chainpoint starting height
+of Block #337022. All of these can be customized with the above options.
+
+```bash
+$ chp bhn start
+```
+
+Your terminal will output the connection configuration for your node and prompt for a confirmation
+before starting up. Note that bhn currently takes up the current process and you will need to open another
+terminal session to interact with it.
+
+### Proof verification against local node
+
+Local verification happens automatically if you have a node already running.
+Note that you shouldn't pass the `bhn` prefix for this, just make sure to pass in any
+necessary connection configs such as API key or host information when running the `verify` command.
+You can even verify against a node you have running remotely and will work against normal bcoin Full or
+SPV Nodes too.
+
+If no node matching the configs can be connected to, then the cli will fallback to the old method of verification
+by pinging Chainpoint nodes.
+
+```bash
+$ chp verify -a
+```
+
+### Other interactions
+
+Here are some other useful commands you can run in another terminal window once your node is running
+
+To get running info of your node, including sync status:
+
+```bash
+$ chp bhn info
+```
+
+To get a block header at a specific height:
+
+```bash
+$ chp bhn get 500000
+```
+
+To execute arbitrary rpc commands:
+
+```bash
+# this gets the block your node started syncing from
+$ chp bhn execute getstartheader
+# and this gets information about the peers you're connected to
+$ chp bhn execute getpeerinfo
+```
+
+Check out the [bcoin api documentation](http://bcoin.io/api-docs/index.html#rpc-calls-node)
+for more avaialable RPC commands.
 
 ### Help
 
