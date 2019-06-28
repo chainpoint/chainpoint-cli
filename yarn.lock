@@ -322,9 +322,9 @@ bcoin@^1.0.2:
     mrmr "~0.1.0"
     n64 "~0.2.0"
 
-bcoin@bcoin-org/bcoin#0551096c0a0dae4ad8fb9f1e135b743d50a19983:
+bcoin@bcoin-org/bcoin#f00985fefb3984330a5a1e42782f708369407257:
   version "1.0.2"
-  resolved "https://codeload.github.com/bcoin-org/bcoin/tar.gz/0551096c0a0dae4ad8fb9f1e135b743d50a19983"
+  resolved "https://codeload.github.com/bcoin-org/bcoin/tar.gz/f00985fefb3984330a5a1e42782f708369407257"
   dependencies:
     bcfg "~0.1.6"
     bclient "~0.1.7"
@@ -456,11 +456,11 @@ bheep@~0.1.0, bheep@~0.1.5:
   dependencies:
     bsert "~0.0.10"
 
-"bhn@git+ssh://git@github.com:chainpoint/bitcoin-header-node.git":
+"bhn@https://github.com/chainpoint/bitcoin-header-node.git":
   version "0.0.1"
-  resolved "git+ssh://git@github.com:chainpoint/bitcoin-header-node.git#bb949c45dcf19883b1cbee4b7c8d71c04b71d64c"
+  resolved "https://github.com/chainpoint/bitcoin-header-node.git#02ab8e21a516605bc78e9e5960109530a782b6cb"
   dependencies:
-    bcoin bcoin-org/bcoin#0551096c0a0dae4ad8fb9f1e135b743d50a19983
+    bcoin bcoin-org/bcoin#f00985fefb3984330a5a1e42782f708369407257
     bcurl "^0.1.6"
     bdb "^1.1.5"
     bfile "^0.2.0"
