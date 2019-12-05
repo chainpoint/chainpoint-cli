@@ -96,7 +96,7 @@ async function startAsync() {
         submitCmd.executeAsync(yargs, argv)
       })
       .command('update', 'retrieve an updated proof for your hash(es), if available', async yargs => {
-        let argv = yargs.usage('Usage: update [options] <hash_id_node>').option('a', {
+        let argv = yargs.usage('Usage: update [options] <proof_id>').option('a', {
           alias: 'all',
           demandOption: false,
           requiresArg: false,
@@ -106,7 +106,7 @@ async function startAsync() {
         updateCmd.executeAsync(yargs, argv)
       })
       .command('verify', "verify a proof's anchor claims", async yargs => {
-        let argv = yargs.usage('Usage: verify [options] <hash_id_node>').option('a', {
+        let argv = yargs.usage('Usage: verify [options] <proof_id>').option('a', {
           alias: 'all',
           demandOption: false,
           requiresArg: false,
@@ -117,7 +117,7 @@ async function startAsync() {
       })
       .command('evaluate', "evaluate and display a proof's anchor claims", async yargs => {
         let argv = yargs
-          .usage('Usage: evaluate [options] <hash_id_node>')
+          .usage('Usage: evaluate [options] <proof_id>')
           .option('a', {
             alias: 'all',
             demandOption: false,
@@ -135,7 +135,7 @@ async function startAsync() {
         evaluateCmd.executeAsync(yargs, argv)
       })
       .command('export', 'export a proof', async yargs => {
-        let argv = yargs.usage('Usage: export [options] <hash_id_node>').option('b', {
+        let argv = yargs.usage('Usage: export [options] <proof_id>').option('b', {
           alias: 'binary',
           demandOption: false,
           requiresArg: false,
@@ -148,12 +148,12 @@ async function startAsync() {
         let argv = yargs.usage('Usage: list').argv
         listCmd.executeAsync(yargs, argv)
       })
-      .command('show', 'show the proof for a hash_id_node', yargs => {
-        let argv = yargs.usage('Usage: show [hash_id_node]').argv
+      .command('show', 'show the proof for a proof_id', yargs => {
+        let argv = yargs.usage('Usage: show [proof_id]').argv
         showCmd.executeAsync(yargs, argv)
       })
       .command('delete', 'delete a hash from the local database', yargs => {
-        let argv = yargs.usage('Usage: delete <hash_id_node>').argv
+        let argv = yargs.usage('Usage: delete <proof_id>').argv
         deleteCmd.executeAsync(yargs, argv)
       })
       .command('bhn', 'interact with a header node, either one running locally or remotely', yargs =>

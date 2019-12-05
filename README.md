@@ -77,7 +77,7 @@ Commands:
   evaluate  evaluate and display a proof's anchor claims
   export    export a proof
   list      display the status of every hash in the local database
-  show      show the proof for a hash_id_node
+  show      show the proof for a proof_id
   delete    delete a hash from the local database
   version   show the CLI version
 
@@ -160,7 +160,7 @@ chp show 52eb62c0-f556-11e7-bcf8-016fed1c55ad | jq
   "@context": "https://w3id.org/chainpoint/v3",
   "type": "Chainpoint",
   "hash": "2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794",
-  "hash_id_node": "52eb62c0-f556-11e7-bcf8-016fed1c55ad",
+  "proof_id": "52eb62c0-f556-11e7-bcf8-016fed1c55ad",
   "hash_submitted_node_at": "2018-01-09T16:01:16Z",
   "hash_id_core": "534fc9e0-f556-11e7-b0bd-016959c78193",
   "hash_submitted_core_at": "2018-01-09T16:01:17Z",
