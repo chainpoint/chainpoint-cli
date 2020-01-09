@@ -85,7 +85,7 @@
     "husky": "^1.3.1",
     "lint-staged": "^8.0.5",
     "mocha": "^5.2.0",
-    "pkg": "^4.3.4",
+    "pkg": "https://github.com/kyokan/pkg.git",
     "prettier": "^1.17.0",
     "rimraf": "^2.6.2"
   }
