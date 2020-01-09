@@ -10,4 +10,6 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends yarn
 WORKDIR /
 RUN cd / && git clone https://github.com/chainpoint/chainpoint-cli.git
 RUN cd /chainpoint-cli && git checkout origin/proof-v4 && yarn && yarn run build
-RUN ls
+RUN ls /chainpoint-cli/build
+CMD ["/chainpoint-cli/build/chainpoint-cli-linux"]
+
