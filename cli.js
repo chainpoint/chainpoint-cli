@@ -156,36 +156,6 @@ async function startAsync() {
         let argv = yargs.usage('Usage: delete <proof_id>').argv
         deleteCmd.executeAsync(yargs, argv)
       })
-      .command('bhn', 'interact with a header node, either one running locally or remotely', yargs =>
-        yargs
-          .commandDir('lib/bhn')
-          .usage('Usage: bhn <command> [options...]')
-          .option('bhn-uri', {
-            describe:
-              'full uri of bitcoin header node. If no port is given, assumed default RPC port for Bitcoin Mainnet (8332)'
-          })
-          .option('bhn-api-key', {
-            describe: 'api key if target node requires authentication'
-          })
-          .option('bhn-host', {
-            describe: 'host of target bitcoin header node',
-            default: 'localhost'
-          })
-          .option('bhn-port', {
-            describe: 'port of target bitcoin header node if different from default bitcoin RPC port'
-          })
-          .option('bhn-network', {
-            describe:
-              'Bitcoin network the target node is running on. This option is useful if want to target default ports. (--network also works)',
-            default: 'main'
-          })
-          .option('bhn-protocol', {
-            describe: 'protocol where target bitcoin header node is running',
-            default: 'http:'
-          })
-          .demandCommand(1, 'Must pass a command to run with bhn, e.g. chp bhn start')
-          .help()
-      )
       .command('version', 'show the CLI version', yargs => {
         let argv = yargs.usage('Usage: version').argv
         versionCmd.executeAsync(yargs, argv)
