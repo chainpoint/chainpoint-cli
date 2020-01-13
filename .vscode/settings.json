@@ -12,5 +12,8 @@
   // Control whether or not jslint is enabled for JavaScript files.
   "jslint.enable": false,
   // Controls whether JavaScript Standard Style is enabled for JavaScript files or not.
-  "standard.enable": false
+  "standard.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
