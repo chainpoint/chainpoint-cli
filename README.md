@@ -35,7 +35,6 @@ Git tagged releases are automatically built as a single-file binary and uploaded
 
 - Alpine Linux (x64)
 - Linux (x64)
-- Linux (x86)
 - macOS (x64)
 
 You can find the most current releases at [https://github.com/chainpoint/chainpoint-cli/releases](https://github.com/chainpoint/chainpoint-cli/releases)
@@ -45,7 +44,9 @@ These binaries are created with the [pkg](https://github.com/zeit/pkg#readme) to
 Install & Run
 
 ```
-$ wget https://github.com/chainpoint/chainpoint-cli/releases/download/v1.4.6/chainpoint-cli-macos-x64 -O chp && chmod 755 chp
+$ curl -L https://github.com/chainpoint/chainpoint-cli/releases/download/v2.0.0/chainpoint-cli-linux -o chp
+
+$ chmod +x chp
 
 $ ./chp
 Usage: chp <command> [options] <argument>
@@ -109,7 +110,7 @@ chp submit 2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794
 
 The output returned consists of three parts:
 
-The `node_hash_id` is `52eb62c0-f556-11e7-bcf8-016fed1c55ad` in this example. This type 1 UUID serves as a handle to retrieve a proof.
+The `proof_id` is `52eb62c0-f556-11e7-bcf8-016fed1c55ad` in this example. This type 1 UUID serves as a handle to retrieve a proof.
 
 The original hash you submitted (`2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794`) is echoed back.
 
@@ -130,7 +131,7 @@ chp update 52eb62c0-f556-11e7-bcf8-016fed1c55ad
 52eb62c0-f556-11e7-bcf8-016fed1c55ad | updated | cal
 ```
 
-You can see that you call `chp update` and just pass the `node_hash_id` as well.
+You can see that you call `chp update` and just pass the `proof_id` as well.
 
 You'll see echoed back to you the status, where the `cal` at the end indicates that the proof is anchored to the `Calendar`. Later you will see other blockchain anchors become available, such as `btc` to indicate that a
 hash was anchored to the Bitcoin blockchain.
@@ -146,62 +147,138 @@ chp verify 52eb62c0-f556-11e7-bcf8-016fed1c55ad
 52eb62c0-f556-11e7-bcf8-016fed1c55ad | verified | cal
 ```
 
-You can see here that the proof represented by the `node_hash_id` provided is anchored to the Calendar (`cal`) level.
+You can see here that the proof represented by the `proof_id` provided is anchored to the Calendar (`cal`) level.
 
 ### Viewing a Proof
 
 You can of course view a proof in its entirety by asking
-to see the proof associated with a `node_hash_id`.
+to see the proof associated with a `proof_id`.
 
 ```
-chp show 52eb62c0-f556-11e7-bcf8-016fed1c55ad | jq
+chp --node-uri http://3.136.178.15 show 5e0433d0-46da-11ea-a79e-017f19452571 | jq
 
 {
-  "@context": "https://w3id.org/chainpoint/v3",
+  "@context": "https://w3id.org/chainpoint/v4",
   "type": "Chainpoint",
-  "hash": "2e75eaf17b8345c67234dfa92e867541ef41dda08baa6f8d5464fac432950794",
-  "proof_id": "52eb62c0-f556-11e7-bcf8-016fed1c55ad",
-  "hash_submitted_node_at": "2018-01-09T16:01:16Z",
-  "hash_id_core": "534fc9e0-f556-11e7-b0bd-016959c78193",
-  "hash_submitted_core_at": "2018-01-09T16:01:17Z",
+  "hash": "ffff27222fe366d0b8988b7312c6ba60ee422418d92b62cdcb71fe2991ee7391",
+  "proof_id": "5e0433d0-46da-11ea-a79e-017f19452571",
+  "hash_received": "2020-02-03T23:10:28Z",
   "branches": [
     {
-      "label": "cal_anchor_branch",
-      "ops": [
+      "label": "aggregator",
+      "ops": [],
+      "branches": [
         {
-          "l": "node_id:52eb62c0-f556-11e7-bcf8-016fed1c55ad"
-        },
-        {
-          "op": "sha-256"
-        },
-        {
-          "l": "core_id:534fc9e0-f556-11e7-b0bd-016959c78193"
-        },
-        {
-          "op": "sha-256"
-        },
-        {
-          "l": "nist:1515513660:042c2248a9b3af5f1d33f64bb3f8d6a2d1028409b9a028538cca63521e79aeb684f3a48cdbf2074cbf48e54fcd3375703d1ad56602e326a3805ebf1066f7aaff"
-        },
-        {
-          "op": "sha-256"
-        },
-        {
-          "l": "986719:1515513680:1:https://b.chainpoint.org:cal:986719"
-        },
-        {
-          "r": "4d8c2a7eab273ac9a7aa32e3c35805a4eaac3652be27142f8b459dd61737ab06"
-        },
-        {
-          "op": "sha-256"
-        },
-        {
-          "anchors": [
+          "label": "cal_anchor_branch",
+          "ops": [
             {
-              "type": "cal",
-              "anchor_id": "986719",
-              "uris": [
-                "https://b.chainpoint.org/calendar/986719/hash"
+              "l": "nistv2:1580771400:d5aa7ffdada5f6b9c6743ffd245c1d2b2ca32c68eca35576181c882f77cecda3a304d8ea4f9a0293831095187f6b5a0bfda1bd79d93da2badd45edf406b5691d"
+            },
+            {
+              "op": "sha-256"
+            },
+            {
+              "anchors": [
+                {
+                  "type": "tcal",
+                  "anchor_id": "7159fe850b6ddb51ff50dc4d44b1aa363128e52ad49f21fd68b1cd0c77afa64d",
+                  "uris": [
+                    "http://3.135.54.225/calendar/7159fe850b6ddb51ff50dc4d44b1aa363128e52ad49f21fd68b1cd0c77afa64d/data"
+                  ]
+                }
+              ]
+            }
+          ],
+          "branches": [
+            {
+              "label": "btc_anchor_branch",
+              "ops": [
+                {
+                  "r": "f472ed9ff3018dfd499d7b2cd8f1fc7905c4b7204bac2bd7050b153391987ca6"
+                },
+                {
+                  "op": "sha-256"
+                },
+                {
+                  "l": "ba707b57f9eadb627d9393417df9b28e382ad9efec15e48ecc8d96fa87ba2079"
+                },
+                {
+                  "op": "sha-256"
+                },
+                {
+                  "l": "0100000001161056cfe33bb565f50cff84e30b5d14720d4a7172ab246be96f3d28ba22b8810000000000ffffffff020000000000000000226a20"
+                },
+                {
+                  "r": "08e0ee0500000000160014a2ae5c0fec0e93b33d25909f42b24877376d25cc00000000"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "l": "7cac66fad58fb08cacd6776a8a0809d9021fcebe2d5c0213c896efceda5bf36a"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "l": "30da4ce3b26c504efbea5fb9f4b2ec8f90e813903d60571fe66a0024f3cd8bf9"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "d2fb192142c66f660fe90289f3348e359d77961f74eec41c0dc4b807bbc2b91e"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "43272a988b0fadf0c1bcebed5fd7e9bd7997e42fa8f363ca319a150ec70b24d4"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "83dc9a9f490a8590bd7e213b9e4383be3f7b31e23d54c811aca00fe4eec9f939"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "272e88bfa321f02d2b4c1a16b71daa04048cb643fc4b8b6b581488f0b6a9845f"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "7eeb158ac9fdec5b3c69b0218eeb2632a1e77307197f159499d195fae34756f8"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "d05416db085e08e0bfd3bdad3195f1e94d49db825007c662777d825d37951c56"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "r": "a1db66df5ca62af0c0fc5bcd28116b4d2d4a47f8c18a9fe08209cb358fba0f6c"
+                },
+                {
+                  "op": "sha-256-x2"
+                },
+                {
+                  "anchors": [
+                    {
+                      "type": "tbtc",
+                      "anchor_id": "1664848",
+                      "uris": [
+                        "http://3.135.54.225/calendar/1eedc4483110bc656cf21e39a8b77041798ef49b8b0a5cd266f3060d81087fb7/data"
+                      ]
+                    }
+                  ]
+                }
               ]
             }
           ]
