@@ -69,11 +69,11 @@ async function startAsync() {
             .slice(0, -3) +
           ' <command> [options] <argument>'
       )
-      .option('n', {
-        alias: 'node-uri',
+      .option('g', {
+        alias: 'gateway-uri',
         requiresArg: true,
-        default: env.CHAINPOINT_NODE_API_BASE_URI,
-        description: 'specify uri of chainpoint node',
+        default: env.CHAINPOINT_GATEWAY_BASE_URI,
+        description: 'specify uri of chainpoint gateway',
         type: 'string'
       })
       .option('q', {

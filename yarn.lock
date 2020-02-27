@@ -705,10 +705,10 @@ chainpoint-binary@^5.0.0:
     msgpack-lite "^0.1.26"
     pako "^1.0.10"
 
-chainpoint-client@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/chainpoint-client/-/chainpoint-client-0.4.5.tgz#bd92e63afcff67aa12f04f2fe43a131f4d49c64d"
-  integrity sha512-tJZXtNjJOwVnbkqebHkpPwG0vA9eDMFBJURsOoncRTHkwdUAKoZWBtTVIZ2sVf37lJf5ga5QhKZ40vcCbIOZjw==
+chainpoint-js@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/chainpoint-js/-/chainpoint-js-0.4.4.tgz#4a4278323af8212e873f0e14809b0adb1396b71e"
+  integrity sha512-C/Nh4wjyAzrnnlw4CfsXrlHpm0AOUoSrDXH8p0F8vPdL+vD8HJW2aJ2oeetQhUkRIvZXYLXv0TSg4wrfiSOekQ==
   dependencies:
     "@babel/polyfill" "^7.4.3"
     "@ungap/url-search-params" "^0.1.2"

@@ -72,7 +72,7 @@ $ chp
 Usage: chp <command> [options] <argument>
 
 Commands:
-  submit    submit a hash to be anchored 
+  submit    submit a hash to be anchored
   update    retrieve an updated proof for your hash(es), if available
   verify    verify a proof's anchor claims
   evaluate  evaluate and display a proof's anchor claims
@@ -83,7 +83,7 @@ Commands:
   version   show the CLI version
 
 Options:
-  -n, --node-uri  specify uri of chainpoint node [string] [default: "http://0.0.0.0"]
+  -g, --gateway-uri  specify uri of chainpoint gateway [string] [default: "http://0.0.0.0"]
   -q, --quiet   suppress all non-error output                               [boolean]
   -j, --json    format all output as json                                   [boolean]
   -b, --btc     display btc specific information where applicable           [boolean]
@@ -347,7 +347,7 @@ Commands:
 
 Options:
   --version       Show version number                         [boolean]
-  -n, --node-uri  specify uri of chainpoint node
+  -g, --gateway-uri  specify uri of chainpoint gateway
                                    [string] [default: "http://0.0.0.0"]
   -q, --quiet     suppress all non-error output               [boolean]
   -j, --json      format all output as json                   [boolean]
@@ -433,8 +433,8 @@ $ chp submit --help
 Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )
 
 Options:
-  -n, --node-uri  specify uri of chainpoint node
-                                  [string] [default: "http://NODE_URI"]
+  -g, --gateway-uri  specify uri of chainpoint gateay
+                                  [string] [default: "http://GATEWAY_URI"]
   -q, --quiet   suppress all non-error output                          [boolean]
   -j, --json    format all output as json                              [boolean]
   --help        show help                                              [boolean]
