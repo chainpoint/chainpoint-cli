@@ -8,7 +8,7 @@
 
 A Command Line Interface (CLI) for creating and verifying Chainpoint proofs. See https://chainpoint.org
 
-The Chainpoint CLI lets you submit hashes to a Chainpoint Node on the Chainpoint Network. Nodes periodically aggregate hashes and send data to Chainpoint Core for anchoring the hash to public blockchains.
+The Chainpoint CLI lets you submit hashes to a Chainpoint Gateway on the Chainpoint Network. Gateways periodically aggregate hashes and send data to Chainpoint Core for anchoring the hash to public blockchains.
 
 The CLI lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
 
@@ -55,24 +55,24 @@ Usage: chp <command> [options] <argument>
 
 ## Usage
 
-You can get an overview of the CLI usage by typing the command (`chp`). The Node that the CLI will
+You can get an overview of the CLI usage by typing the command (`chp`). The Gateway that the CLI will
 communicate with will be chosen from those advertised as healthy on the network.
 
 On first use, the CLI will create a `~/.chainpoint/cli` directory
 where it will store its `chainpoint-proofs.db`
 file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
-you submit, which Node it was submitted to, and a copy of the
+you submit, which Gateway it was submitted to, and a copy of the
 proofs. You can create a `cli.config` file in this directory
 with a `CHAINPOINT_NODE_API_BASE_URI=` value if you'd like to
-permanently specify a Node of your own choosing.
+permanently specify a Gateway of your own choosing.
 
 ```
 $ chp
 Usage: chp <command> [options] <argument>
 
 Commands:
-  submit    submit a hash to be anchored (3x Nodes default)
+  submit    submit a hash to be anchored 
   update    retrieve an updated proof for your hash(es), if available
   verify    verify a proof's anchor claims
   evaluate  evaluate and display a proof's anchor claims
