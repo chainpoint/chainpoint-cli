@@ -19,6 +19,9 @@ locally for easy retrieval, export, and verification.
 The CLI includes an interface for interacting with a [Bitcoin Header Node](https://github.com/chainpoint/bitcoin-header-node)
 which can be used for verifying btc anchors locally rather than relying on an external service.
 
+**Important:** This CLI has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with Gateways on the new network.
+If you would like to still use the CLI for older v3 proofs, please use CLI version v1.6.1 instead.
+
 ## Backwards Incompatible Changes for V2
 
 - cli arg for passing a custom node server was changed from `--server` and `-s` to `--node-uri` and `-n`.
@@ -64,7 +67,7 @@ file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
 you submit, which Gateway it was submitted to, and a copy of the
 proofs. You can create a `cli.config` file in this directory
-with a `CHAINPOINT_NODE_API_BASE_URI=` value if you'd like to
+with a `CHAINPOINT_GATEWAY_BASE_URI=` value if you'd like to
 permanently specify a Gateway of your own choosing.
 
 ```
