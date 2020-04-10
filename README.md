@@ -18,15 +18,7 @@ The CLI includes an interface for interacting with a [Bitcoin Header Node](https
 which can be used for verifying btc anchors locally rather than relying on an external service.
 
 **Important:** This CLI has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with Gateways on the new network.
-If you would like to still use the CLI for older v3 proofs, please use CLI version v1.6.1 instead.
-
-## Backwards Incompatible Changes for V2
-
-- cli arg for passing a custom node server was changed from `--server` and `-s` to `--node-uri` and `-n`.
-  Use `chp --help` for more info
-- To pass connection configs for a bitcoin header node (bhn), preface with a `--bhn-`, e.g. `--bhn-uri`, `--bhn-port`, or `--bhn-api-key`
-- Submissions and verifications now happen on the new Chainpoint network. If you would like to use the CLI
-  for verifying older proofs, please downgrade to v1.x.x of the CLI
+If you would like to still use the CLI for v3 proofs or older, please use CLI version v1.6.1 instead.
 
 ## Installation
 
