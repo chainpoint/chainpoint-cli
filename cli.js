@@ -86,7 +86,7 @@ async function startAsync() {
       })
       .command('submit', 'submit a hash to be anchored (3x Nodes default)', async yargs => {
         let argv = yargs.usage('Usage: submit [options] (<hash> <hash>... | <hash>,<hash>,... )').string('_').argv
-        argv.nodeUri = await parseBaseUriAsync(argv.nodeUri)
+        argv.gatewayUri = await parseBaseUriAsync(argv.gatewayUri)
         submitCmd.executeAsync(yargs, argv)
       })
       .command('update', 'retrieve an updated proof for your hash(es), if available', async yargs => {
