@@ -2,8 +2,6 @@
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Build Status](https://travis-ci.org/chainpoint/chainpoint-cli.svg?branch=master)](https://travis-ci.org/chainpoint/chainpoint-cli)
-[![npm](https://img.shields.io/npm/l/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 [![npm](https://img.shields.io/npm/v/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 
 A Command Line Interface (CLI) for creating and verifying Chainpoint proofs. See https://chainpoint.org
