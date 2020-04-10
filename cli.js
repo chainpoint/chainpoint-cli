@@ -18,16 +18,13 @@ const getStdin = require('get-stdin')
 const yargs = require('yargs')
 
 async function parseBaseUriAsync(baseUri) {
-  // if the value supplied in --node-uri or in chainpoint-cli.config is invalid, exit
+  // if the value supplied in --gateway-uri or in cli.config is invalid, exit
   if (!utils.isValidUrl(baseUri)) {
-    console.error(`Invalid node uri - ${baseUri}`)
+    console.error(`Invalid gateway uri - ${baseUri}`)
     process.exit(1)
   }
-  // if no value was specified in --node-uri or in cli.config, let the chainpint-client select node(s)
-  // http://0.0.0.0 is the env default, and represents a null setting
-  if (baseUri === 'http://0.0.0.0') return null
 
-  // otherwise, return the valid value supplied with --node-uri or in cli.config as a one element array
+  // otherwise, return the valid value supplied with --gateway-uri or in cli.config as a one element array
   return baseUri
 }
 

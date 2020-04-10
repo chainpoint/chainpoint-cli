@@ -59,7 +59,7 @@ You can get an overview of the CLI usage by typing the command (`chp`). The Gate
 communicate with will be chosen from those advertised as healthy on the network.
 
 On first use, the CLI will create a `~/.chainpoint/cli` directory
-where it will store its `chainpoint-proofs.db`
+where it will store its `chainpoint-v4-proofs.db`
 file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
 you submit, which Gateway it was submitted to, and a copy of the
