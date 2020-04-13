@@ -34,7 +34,9 @@ You can find the most current releases at [https://github.com/chainpoint/chainpo
 
 These binaries are created with the [pkg](https://github.com/zeit/pkg#readme) tool and have no pre-requisites. It is _not_ necessary to install even Node.js as it is packaged in the binary. Installation is a simple matter of downloading the appropriate file, giving it execute permissions, and running it from a location on your `PATH`.
 
-Install & Run
+#### Install & Run
+
+The example below is for Linux. For an alternate architecture, replace 'linux' below with either `macos` or `alpine`.
 
 ```
 $ curl -L https://github.com/chainpoint/chainpoint-cli/releases/download/v2.0.0/chainpoint-cli-linux -o chp
