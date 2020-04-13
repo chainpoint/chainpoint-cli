@@ -2,8 +2,6 @@
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Build Status](https://travis-ci.org/chainpoint/chainpoint-cli.svg?branch=master)](https://travis-ci.org/chainpoint/chainpoint-cli)
-[![npm](https://img.shields.io/npm/l/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 [![npm](https://img.shields.io/npm/v/chainpoint-cli.svg)](https://www.npmjs.com/package/chainpoint-cli)
 
 A Command Line Interface (CLI) for creating and verifying Chainpoint proofs. See https://chainpoint.org
@@ -19,13 +17,8 @@ locally for easy retrieval, export, and verification.
 The CLI includes an interface for interacting with a [Bitcoin Header Node](https://github.com/chainpoint/bitcoin-header-node)
 which can be used for verifying btc anchors locally rather than relying on an external service.
 
-## Backwards Incompatible Changes for V2
-
-- cli arg for passing a custom node server was changed from `--server` and `-s` to `--node-uri` and `-n`.
-  Use `chp --help` for more info
-- To pass connection configs for a bitcoin header node (bhn), preface with a `--bhn-`, e.g. `--bhn-uri`, `--bhn-port`, or `--bhn-api-key`
-- Submissions and verifications now happen on the new Chainpoint network. If you would like to use the CLI
-  for verifying older proofs, please downgrade to v1.x.x of the CLI
+**Important:** This CLI has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with Gateways on the new network.
+If you would like to still use the CLI for v3 proofs or older, please use CLI version v1.6.1 instead.
 
 ## Installation
 
@@ -59,12 +52,12 @@ You can get an overview of the CLI usage by typing the command (`chp`). The Gate
 communicate with will be chosen from those advertised as healthy on the network.
 
 On first use, the CLI will create a `~/.chainpoint/cli` directory
-where it will store its `chainpoint-proofs.db`
+where it will store its `chainpoint-v4-proofs.db`
 file. The database file will be managed for you and it is not recommended to
 modify it yourself. The database stores a record of every hash
 you submit, which Gateway it was submitted to, and a copy of the
 proofs. You can create a `cli.config` file in this directory
-with a `CHAINPOINT_NODE_API_BASE_URI=` value if you'd like to
+with a `CHAINPOINT_GATEWAY_BASE_URI=` value if you'd like to
 permanently specify a Gateway of your own choosing.
 
 ```
