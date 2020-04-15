@@ -384,8 +384,7 @@ necessary connection configs such as API key or host information when running th
 You can even verify against a node you have running remotely and will work against normal bcoin Full or
 SPV Nodes too.
 
-If no node matching the configs can be connected to, then the cli will fallback to the old method of verification
-by pinging Chainpoint nodes.
+If no node matching the configs can be connected to, then the CLI will fallback to using Chainpoint Gateways.
 
 ```bash
 $ chp verify -a
