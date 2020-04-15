@@ -696,15 +696,6 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-chainpoint-binary@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-5.0.0.tgz#7cd9a6b7ca318836cdf00c1f16d674b2d736a3a7"
-  integrity sha512-LrwqbREUKRqllEEIcZ23QpsfREqXjSAVys9CIIf4rX7f7Hz2/HRjxEEQZZ+hEcW4JufuzvZIXSuRE8tXXFz32w==
-  dependencies:
-    chainpoint-proof-json-schema "^2.0.1"
-    msgpack-lite "^0.1.26"
-    pako "^1.0.10"
-
 chainpoint-binary@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-5.0.1.tgz#88deae6898793f11bff174442ae4b61c677b1b53"
@@ -738,13 +729,6 @@ chainpoint-parse@^4.0.1:
     chainpoint-binary "^5.0.1"
     chainpoint-proof-json-schema "^2.0.3"
     js-sha3 "^0.8.0"
-
-chainpoint-proof-json-schema@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-2.0.1.tgz#64d83bcf2bf23d5c5194b65e2cc4d955b6ecae0f"
-  integrity sha512-mf4YGkq9XGQYuEBmyhYuX7HaF2au/zmYDfxbMV5FM3vcV8jUuUJAOQ3JGSNVvRAKE1M8kv7v+JkxUxqctdwnnQ==
-  dependencies:
-    is-my-json-valid "^2.20.0"
 
 chainpoint-proof-json-schema@^2.0.3:
   version "2.0.3"
