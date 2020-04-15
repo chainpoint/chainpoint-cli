@@ -1,3 +1,7 @@
+# Important:
+
+The package is for the Chainpont v4 Network. If you are looking to work with the older Chainpoint v3 Network (chainpoint-services), use version 1.6.1.
+
 # Chainpoint CLI
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -16,9 +20,6 @@ locally for easy retrieval, export, and verification.
 
 The CLI includes an interface for interacting with a [Bitcoin Header Node](https://github.com/chainpoint/bitcoin-header-node)
 which can be used for verifying btc anchors locally rather than relying on an external service.
-
-**Important:** This CLI has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with Gateways on the new network.
-If you would like to still use the CLI for v3 proofs or older, please use CLI version v1.6.1 instead.
 
 ## Installation
 
@@ -78,7 +79,7 @@ Commands:
   version   show the CLI version
 
 Options:
-  -g, --gateway-uri  specify uri of chainpoint gateway [string] [default: "http://0.0.0.0"]
+  -g, --gateway-uri  specify uri of chainpoint gateway                      [string]
   -q, --quiet   suppress all non-error output                               [boolean]
   -j, --json    format all output as json                                   [boolean]
   -b, --btc     display btc specific information where applicable           [boolean]
@@ -342,8 +343,7 @@ Commands:
 
 Options:
   --version       Show version number                         [boolean]
-  -g, --gateway-uri  specify uri of chainpoint gateway
-                                   [string] [default: "http://0.0.0.0"]
+  -g, --gateway-uri  specify uri of chainpoint gateway        [string]
   -q, --quiet     suppress all non-error output               [boolean]
   -j, --json      format all output as json                   [boolean]
   --bhn-uri       full uri of bitcoin header node. If no port is given,
