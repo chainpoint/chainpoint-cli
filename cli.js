@@ -18,13 +18,14 @@ const getStdin = require('get-stdin')
 const yargs = require('yargs')
 
 async function parseBaseUriAsync(baseUri) {
+  // if no value was supplied, the default dummy value was used, return null
+  if (!baseUri) return null
   // if the value supplied in --gateway-uri or in cli.config is invalid, exit
   if (!utils.isValidUrl(baseUri)) {
     console.error(`Invalid gateway uri - ${baseUri}`)
     process.exit(1)
   }
-
-  // otherwise, return the valid value supplied with --gateway-uri or in cli.config as a one element array
+  // otherwise, return the valid value supplied with --gateway-uri or in cli.config
   return baseUri
 }
 
@@ -66,7 +67,7 @@ async function startAsync() {
       .option('g', {
         alias: 'gateway-uri',
         requiresArg: true,
-        default: env.CHAINPOINT_GATEWAY_BASE_URI,
+        default: env.CHAINPOINT_GATEWAY_BASE_URI !== 'http://0.0.0.0' ? env.CHAINPOINT_GATEWAY_BASE_URI : undefined,
         description: 'specify uri of chainpoint gateway',
         type: 'string'
       })
