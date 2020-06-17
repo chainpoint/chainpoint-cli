@@ -147,7 +147,7 @@ You can of course view a proof in its entirety by asking
 to see the proof associated with a `proof_id`.
 
 ```
-chp --node-uri http://3.136.178.15 show 5e0433d0-46da-11ea-a79e-017f19452571 | jq
+chp --gateway-uri http://3.136.178.15 show 5e0433d0-46da-11ea-a79e-017f19452571 | jq
 
 {
   "@context": "https://w3id.org/chainpoint/v4",
